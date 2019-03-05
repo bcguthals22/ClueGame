@@ -21,8 +21,17 @@ public class Board {
 	
 	public String roomConfigFile;
 	
+	// variable used for singleton pattern
+	private static Board theInstance = new Board();
+	// constructor is private to ensure only one can be created
+	private Board() {}
+	// this method returns the only Board
+	public static Board getInstance1() {
+		return theInstance;
+	}
 	
-	public Board getInstance() {
+	
+	public static Board getInstance() {
 		
 		return null; 
 	}
@@ -47,5 +56,27 @@ public class Board {
 	public void calcTargets(BoardCell cell, int pathLength) {
 		
 	}
+	
+	public void setConfigFiles(String file1, String file2) {
+		
+	}
+	
+	public Map<Character, String> getLegend() {
+		return null;
+	}
+	public int getNumRows() {
+		return numRows;
+	}
+
+	public int getNumColumns() {
+		return numColumns;
+	}
+	
+	public BoardCell getCellAt(int row, int col) {
+		return null; 
+	}
+
+	
+	
 	
 }
