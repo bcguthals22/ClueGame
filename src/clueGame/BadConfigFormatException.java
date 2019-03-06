@@ -1,17 +1,23 @@
+/*
+ * Brennan Guthals & Nicholas Wenzel
+ * 3/6/2019
+ * ClueGame
+ */
 package clueGame;
 
 public class BadConfigFormatException extends Exception {
 
 	public BadConfigFormatException() {
-		super();
-		// TODO Auto-generated constructor stub
+		super("Bad configuration of format.");
+		
 	}
 
-	public BadConfigFormatException(String string) {
-		super(string);
-		// TODO Auto-generated constructor stub
+	public BadConfigFormatException(String error) {
+		super(error);
+		
+		
 	}
-	
-	
+
+
 
 }

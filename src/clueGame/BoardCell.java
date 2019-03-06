@@ -1,8 +1,13 @@
+/*
+ * Brennan Guthals & Nicholas Wenzel
+ * 3/6/2019
+ * ClueGame
+ */
 package clueGame;
 
 public class BoardCell {
 	public int row;
-	
+
 	public int column;
 
 	public BoardCell(int row, int column) {
@@ -25,7 +30,7 @@ public class BoardCell {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	
+
+
+
 }
