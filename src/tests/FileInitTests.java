@@ -40,10 +40,11 @@ public class FileInitTests {
 	@Test
 	public void testNumberOfDoorways() {
 		int doors = 0;
+		String test = "test";
 
 		for(int i = 0; i < board.getNumRows(); i++) {
 			for(int j = 0; j < board.getNumColumns(); j++) {
-				BoardCell holder = new BoardCell(i,j);
+				BoardCell holder = new BoardCell(i,j,test);
 				if(holder.isDoorway() == true) {
 					doors++;
 				}

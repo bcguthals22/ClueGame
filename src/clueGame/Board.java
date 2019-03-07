@@ -13,7 +13,6 @@ import java.util.Set;
 
 import com.sun.javafx.collections.MappingChange.Map;
 
-import experiment.BoardCell;
 
 public class Board {
 	private static final int MAX_BOARD_SIZE = 100; 
@@ -105,9 +104,9 @@ public class Board {
 			
 			for(int i = 0; i < numColumns; i++) {
 				String cha = row[i];
-				Character c = cha.charAt(0); 
 				
-				board[rows][i] = new BoardCell(rows, i); 
+				
+				board[rows][i] = new BoardCell(rows, i, cha); 
 			}
 			
 			rows = rows + 1; 
@@ -136,7 +135,9 @@ public class Board {
 
 	}
 	
-
+	/*
+	 * Returns the legend
+	 */
 	public  java.util.Map<Character, String> getLegend() {
 		
 		return legend;
@@ -144,17 +145,24 @@ public class Board {
 	}
 	
 	
-	
+	/*
+	 * Returns number of rows in board
+	 */
 	public int getNumRows() {
 		return numRows;
 	}
-
+	
+	/*
+	 * Returns number of cols in board
+	 */
 	public int getNumColumns() {
 		return numColumns;
 	}
-
-	public clueGame.BoardCell getCellAt(int row, int col) {
-		return null; 
+	/*
+	 * Returns the cell given a row and col 
+	 */
+	public BoardCell getCellAt(int row, int col) {
+		return board[row][col]; 
 	}
 
 
