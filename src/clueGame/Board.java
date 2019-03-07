@@ -70,8 +70,9 @@ public class Board {
 			String character = in.next();
 			String roomName = in.next();
 			String card = in.next();
+			card = card.substring(1); 
 			
-			if(card != "Card" && card != "Other") {
+			if((!card.contains("Card") && (!card.contains("Other")))) {
 				throw new BadConfigFormatException("Not a valid type: " + card);
 			}
 

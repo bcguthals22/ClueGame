@@ -40,11 +40,10 @@ public class FileInitTests {
 	@Test
 	public void testNumberOfDoorways() {
 		int doors = 0;
-		String test = "test";
 
 		for(int i = 0; i < board.getNumRows(); i++) {
 			for(int j = 0; j < board.getNumColumns(); j++) {
-				BoardCell holder = new BoardCell(i,j,test);
+				BoardCell holder = board.getCellAt(i, j); 
 				if(holder.isDoorway() == true) {
 					doors++;
 				}
@@ -57,26 +56,27 @@ public class FileInitTests {
 	@Test
 	public void testRoomInitials() {
 
-		assertEquals('C', board.getCellAt(0, 0).getInitial());
-		assertEquals('G', board.getCellAt(5, 0).getInitial());
-		assertEquals('A', board.getCellAt(12, 0).getInitial());
-		assertEquals('D', board.getCellAt(0, 5).getInitial());
-		assertEquals('I', board.getCellAt(7, 6).getInitial());
-		assertEquals('S', board.getCellAt(20, 4).getInitial());
-		assertEquals('R', board.getCellAt(20,10).getInitial());
-		assertEquals('K', board.getCellAt(0, 12).getInitial());
-		assertEquals('B', board.getCellAt(0, 16).getInitial());
-		assertEquals('P', board.getCellAt(9,17).getInitial());
-		assertEquals('L', board.getCellAt(18,14).getInitial());
-		assertEquals('X', board.getCellAt(10,13).getInitial());
+		assertEquals("C", board.getCellAt(0, 0).getInitial());
+		assertEquals("A", board.getCellAt(12, 0).getInitial());
+		assertEquals("D", board.getCellAt(0, 5).getInitial());
+		assertEquals("S", board.getCellAt(20, 4).getInitial());
+		assertEquals("R", board.getCellAt(20,10).getInitial());
+		assertEquals("K", board.getCellAt(0, 12).getInitial());
+		assertEquals("B", board.getCellAt(0, 16).getInitial());
+		assertEquals("P", board.getCellAt(9,17).getInitial());
+		assertEquals("L", board.getCellAt(18,14).getInitial());
+		assertEquals("X", board.getCellAt(10,13).getInitial());
 	}
 
 	//Test to see if getNumRows and getNumColumns returns the expected numbers
+	//The subract 1 is due to the numbered edges that we were instructed to place on the the csv
 	@Test
 	public void testRowsColumns() {
-		assertEquals(NUM_ROWS, board.getNumRows());
-		assertEquals(NUM_COLUMNS, board.getNumColumns());
+		
+		assertEquals(NUM_ROWS, board.getNumRows() - 1);
+		assertEquals(NUM_COLUMNS, board.getNumColumns() - 1);
 	}
+
 	//Test that getDoorDirection is returning expected values by picking a door of each enum type: UP, DOWN, RIGHT, LEFT, NONE
 	@Test
 	public void testDoorDirections() {
@@ -102,7 +102,7 @@ public class FileInitTests {
 
 	@Test
 	public void testLegend() throws FileNotFoundException{
-		FileReader reader = new FileReader("ClueLegend.txt");
+		FileReader reader = new FileReader("ClueMapLegend.txt");
 		Scanner in = new Scanner(reader);
 		//Set numLines equal to one since we grab first line before loop
 		int numLines = 1;
@@ -120,3 +120,4 @@ public class FileInitTests {
 	}
 
 }
+

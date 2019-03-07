@@ -42,6 +42,8 @@ public class CTest_FileInitTests {
 	public void testRooms() {
 		// Get the map of initial => room 
 		Map<Character, String> legend = board.getLegend();
+		
+		int test = legend.size();
 		// Ensure we read the correct number of rooms
 		assertEquals(LEGEND_SIZE, legend.size());
 		// To ensure data is correctly loaded, test retrieving a few rooms 
@@ -60,6 +62,7 @@ public class CTest_FileInitTests {
 		assertEquals(NUM_ROWS, board.getNumRows());
 		assertEquals(NUM_COLUMNS, board.getNumColumns());		
 	}
+
 
 	// Test a doorway in each direction (RIGHT/LEFT/UP/DOWN), plus 
 	// two cells that are not a doorway.
@@ -108,6 +111,8 @@ public class CTest_FileInitTests {
 	// Test a few room cells to ensure the room initial is correct.
 	@Test
 	public void testRoomInitials() {
+		
+		String test = board.getCellAt(0, 5).getInitial();
 		
 		// Test first cell in room
 		assertEquals("C", board.getCellAt(0, 0).getInitial());
