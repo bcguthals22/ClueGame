@@ -70,6 +70,10 @@ public class Board {
 			String character = in.next();
 			String roomName = in.next();
 			String card = in.next();
+			
+			if(card != "Card" && card != "Other") {
+				throw new BadConfigFormatException("Not a valid type: " + card);
+			}
 
 			roomName = roomName.substring(1); 
 
@@ -101,10 +105,19 @@ public class Board {
 			if(rows == 0) {
 				numColumns = row.length; 
 			}
+			else if(numColumns != row.length) {
+				throw new BadConfigFormatException("Rows do not have the same number of columns.") ;
+			}
 			
 			for(int i = 0; i < numColumns; i++) {
 				String cha = row[i];
+				Character c = cha.charAt(0);
 				
+				String room = legend.get(c);
+				
+				if(room == null) {
+					throw new BadConfigFormatException("Room type not defined " + cha);
+				}
 				
 				board[rows][i] = new BoardCell(rows, i, cha); 
 			}

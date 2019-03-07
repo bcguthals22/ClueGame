@@ -28,7 +28,7 @@ public class CTest_ExceptionTests {
 		// This one should throw an exception
 		board.loadBoardConfig();
 	}
-	
+
 	// Test that an exception is thrown for a config file that specifies 
 	// a room that is not in the legend. See first test for other important comments. 
 	@Test (expected = BadConfigFormatException.class)
@@ -38,7 +38,7 @@ public class CTest_ExceptionTests {
 		board.loadRoomConfig();
 		board.loadBoardConfig();
 	}
-	
+
 	// Test that an exception is thrown for a config file with a room type 
 	// that is not Card or Other
 	@Test (expected = BadConfigFormatException.class)
