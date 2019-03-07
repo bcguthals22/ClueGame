@@ -62,9 +62,8 @@ public class BoardCell {
 		return DoorDirection.NONE;
 	}
 
-	public Object getInitial() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getInitial() {
+		return type.substring(0,1); 
 	}
 
 
