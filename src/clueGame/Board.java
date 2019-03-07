@@ -20,7 +20,7 @@ public class Board {
 	private int numRows;
 	private int numColumns; 
 
-	public BoardCell[][] board; 
+	public BoardCell[][] board = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE]; 
 
 	public HashMap<Character, String> legend = new HashMap<Character, String>();
 
@@ -45,13 +45,17 @@ public class Board {
 	public void initialize() {
 		try {
 			loadRoomConfig();
+
+			loadBoardConfig();
+
+
 		} catch (FileNotFoundException e) {
 			e.getMessage();
 		} catch (BadConfigFormatException e) {
 			e.getMessage();		}
 
 	}
-	
+
 	/*
 	 * Function for returning the legend of the board given the roomConfigFile(Legend)
 	 * File reader reads in the file stopping at commas and new lines, and puts the 
@@ -75,12 +79,43 @@ public class Board {
 			legend.put(c, roomName);
 		}
 
+	}
+	
+	/*
+	 * Function for loading in the Board Configuration File 
+	 * Reads in the file and splits it into an array at commas
+	 * Sets the number of cols based on size of row.
+	 * Iterates through until there is no next line in the file 
+	 * Makes a board cell of the current col and row and puts it into the board
+	 * Updates the number of rows in the board
+	 */
 
-
+	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException {
+		FileReader reader = new FileReader(boardConfigFile);
+		Scanner in = new Scanner(reader); 
+		
+		int rows = 0;
+		
+		while(in.hasNextLine()) {
+			String line = in.nextLine();
+			String[] row = line.split(",");
+			if(rows == 0) {
+				numColumns = row.length; 
+			}
+			
+			for(int i = 0; i < numColumns; i++) {
+				String cha = row[i];
+				Character c = cha.charAt(0); 
+				
+				board[rows][i] = new BoardCell(rows, i); 
+			}
+			
+			rows = rows + 1; 
+			
 		}
-
-	public void loadBoardConfig() {
-
+		
+		numRows = rows; 
+		
 	}
 
 	public void calcAdjacencies() {

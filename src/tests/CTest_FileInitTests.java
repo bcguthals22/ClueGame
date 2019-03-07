@@ -60,11 +60,12 @@ public class CTest_FileInitTests {
 		assertEquals(NUM_ROWS, board.getNumRows());
 		assertEquals(NUM_COLUMNS, board.getNumColumns());		
 	}
-	}
-	/*
+	
 	// Test a doorway in each direction (RIGHT/LEFT/UP/DOWN), plus 
 	// two cells that are not a doorway.
 	// These cells are white on the planning spreadsheet
+	
+	
 	@Test
 	public void FourDoorDirections() {
 		BoardCell room = board.getCellAt(4, 3);
@@ -87,6 +88,8 @@ public class CTest_FileInitTests {
 		assertFalse(cell.isDoorway());		
 
 	}
+}
+	/*
 	
 	// Test that we have the correct number of doors
 	@Test
