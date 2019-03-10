@@ -18,7 +18,7 @@ public class BoardAdjTargetTests {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("CTest_ClueLayout.csv", "CTest_ClueLegend.txt");		
+		board.setConfigFiles("ClueMap.csv", "ClueMapLegend.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
@@ -28,9 +28,15 @@ public class BoardAdjTargetTests {
 		Set<BoardCell> adj = new HashSet<BoardCell>(); 
 		
 		//Testing walkway with only walkway cells around it
+		//Should contain (11, 5) (11, 3) (12, 4) (10, 4)
 		adj = board.getAdjList(11, 4);
 		//Should have a size of 4
 		assertEquals(4, adj.size());
+		assertTrue(adj.contains(board.getCellAt(11, 5)));
+		assertTrue(adj.contains(board.getCellAt(11, 3)));
+		assertTrue(adj.contains(board.getCellAt(12, 4)));
+		assertTrue(adj.contains(board.getCellAt(10, 4)));
+
 		
 		
 		//Testing left had side of walkway should have 2 adjs being (10, 1) and (11, 0)
@@ -146,8 +152,150 @@ public class BoardAdjTargetTests {
 		assertTrue(adj.contains(board.getCellAt(0, 15)));
 		assertEquals(1, adj.size()); 
 
+	}
+	
+	
+	//Testing one step targets
+	@Test
+	public void testOneStep() {
+		board.calcTargets(20, 3, 1);
+		Set<BoardCell> targets = board.getTargets();
+		assertEquals(2, targets.size());
+		assertTrue(targets.contains(board.getCellAt(20, 2)));
+		assertTrue(targets.contains(board.getCellAt(19, 3)));
+		
+		
+		board.calcTargets(16, 17, 1);
+		targets = board.getTargets();
+		assertEquals(3, targets.size());
+		assertTrue(targets.contains(board.getCellAt(16, 18)));
+		assertTrue(targets.contains(board.getCellAt(16, 16)));
+		assertTrue(targets.contains(board.getCellAt(15, 17)));
+
+	}
+	
+	@Test
+	public void testTwoSteps() {
+		board.calcTargets(20, 3, 2);
+		Set<BoardCell> targets = board.getTargets();
+		assertEquals(2, targets.size());
+		assertTrue(targets.contains(board.getCellAt(18, 3)));
+		assertTrue(targets.contains(board.getCellAt(19, 2)));
+		
+		
+		board.calcTargets(16, 17, 2);
+		targets = board.getTargets();
+		assertEquals(4, targets.size());
+		assertTrue(targets.contains(board.getCellAt(16, 19)));
+		assertTrue(targets.contains(board.getCellAt(16, 15)));
+		assertTrue(targets.contains(board.getCellAt(15, 16)));
+		assertTrue(targets.contains(board.getCellAt(15, 17)));
+	}
+
+	@Test
+	public void testThreeSteps() {
+		board.calcTargets(20, 3, 3);
+		Set<BoardCell> targets = board.getTargets();
+		assertEquals(3, targets.size());
+		assertTrue(targets.contains(board.getCellAt(19, 3)));
+		assertTrue(targets.contains(board.getCellAt(18, 2)));
+		assertTrue(targets.contains(board.getCellAt(17, 3)));
 
 
+		board.calcTargets(16, 17, 3);
+		targets = board.getTargets();
+		assertEquals(5, targets.size());
+		assertTrue(targets.contains(board.getCellAt(16, 20)));
+		assertTrue(targets.contains(board.getCellAt(16, 14)));
+		assertTrue(targets.contains(board.getCellAt(15, 15)));
+		assertTrue(targets.contains(board.getCellAt(14, 16)));
+		assertTrue(targets.contains(board.getCellAt(15, 17)));
+	}
+	
+	
+	@Test
+	public void testFourSteps() {
+		board.calcTargets(20, 3, 4);
+		Set<BoardCell> targets = board.getTargets();
+		assertEquals(3, targets.size());
+		assertTrue(targets.contains(board.getCellAt(13, 3)));
+		assertTrue(targets.contains(board.getCellAt(16, 3)));
+		assertTrue(targets.contains(board.getCellAt(17, 2)));
+
+
+		board.calcTargets(16, 17, 4);
+		targets = board.getTargets();
+		assertEquals(7, targets.size());
+		assertTrue(targets.contains(board.getCellAt(16, 21)));
+		assertTrue(targets.contains(board.getCellAt(16, 13)));
+		assertTrue(targets.contains(board.getCellAt(17, 14)));
+		assertTrue(targets.contains(board.getCellAt(15, 14)));
+		assertTrue(targets.contains(board.getCellAt(15, 16)));
+		assertTrue(targets.contains(board.getCellAt(15, 17)));
+		assertTrue(targets.contains(board.getCellAt(13, 16)));
+	}
+	
+	
+	@Test
+	public void testFiveSteps() {
+		board.calcTargets(20, 3, 5);
+		Set<BoardCell> targets = board.getTargets();
+		assertEquals(3, targets.size());
+		assertTrue(targets.contains(board.getCellAt(18, 2)));
+		assertTrue(targets.contains(board.getCellAt(17, 3)));
+		assertTrue(targets.contains(board.getCellAt(16, 3)));
+
+
+		board.calcTargets(16, 17, 5);
+		targets = board.getTargets();
+		assertEquals(6, targets.size());
+		assertTrue(targets.contains(board.getCellAt(15, 13)));
+		assertTrue(targets.contains(board.getCellAt(17, 13)));
+		assertTrue(targets.contains(board.getCellAt(16, 14)));
+		assertTrue(targets.contains(board.getCellAt(12, 16)));
+		assertTrue(targets.contains(board.getCellAt(15, 16)));
+		assertTrue(targets.contains(board.getCellAt(17, 14)));
+	}
+	
+	
+	@Test
+	public void testSixSteps() {
+		board.calcTargets(20, 3, 6);
+		Set<BoardCell> targets = board.getTargets();
+		assertEquals(4, targets.size());
+		assertTrue(targets.contains(board.getCellAt(14, 3)));
+		assertTrue(targets.contains(board.getCellAt(15, 4)));
+		assertTrue(targets.contains(board.getCellAt(16, 3)));
+		assertTrue(targets.contains(board.getCellAt(17, 2)));
+
+
+
+		board.calcTargets(16, 17, 6);
+		targets = board.getTargets();
+		assertEquals(8, targets.size());
+		assertTrue(targets.contains(board.getCellAt(18, 13)));
+		assertTrue(targets.contains(board.getCellAt(17, 12)));
+		assertTrue(targets.contains(board.getCellAt(17, 14)));
+		assertTrue(targets.contains(board.getCellAt(16, 13)));
+		assertTrue(targets.contains(board.getCellAt(15, 12)));
+		assertTrue(targets.contains(board.getCellAt(15, 14)));
+		assertTrue(targets.contains(board.getCellAt(15, 17)));
+		assertTrue(targets.contains(board.getCellAt(11, 16)));
+	}
+	
+	@Test 
+	public void testRoomExit() {
+		board.calcTargets(12, 0, 1);
+		Set<BoardCell> targets = board.getTargets();
+		
+		assertTrue(targets.contains(board.getCellAt(11, 0)));
+		assertEquals(0, targets.size());
+		
+		
+		board.calcTargets(0, 16, 2); 
+		targets = board.getTargets();
+		
+		assertTrue(targets.contains(board.getCellAt(1, 15)));
 	}
 
 }
