@@ -46,7 +46,22 @@ public class BoardAdjTargetTests {
 		assertTrue(adj.contains(board.getCellAt(7, 20)));
 		assertTrue(adj.contains(board.getCellAt(8, 21)));
 		assertEquals(3, adj.size());
+
 		
+		//Testing walkway that is adjacent to a room but not a door
+		//Should have 3 adj being (9, 4) (7,4) (8,5)
+		adj = board.getAdjList(8,4);
+		assertTrue(adj.contains(board.getCellAt(9, 4)));
+		assertTrue(adj.contains(board.getCellAt(7, 4)));
+		assertTrue(adj.contains(board.getCellAt(8, 5)));
+		assertEquals(3, adj.size());
+		
+		//Another walkway adj to a room but not a door 
+		//Should have 2 adj being (0,3) and (1,4)
+		adj = board.getAdjList(0, 4);
+		assertTrue(adj.contains(board.getCellAt(0, 3)));
+		assertTrue(adj.contains(board.getCellAt(1, 4)));
+		assertEquals(2, adj.size());
 		
 		
 	}
@@ -69,6 +84,44 @@ public class BoardAdjTargetTests {
 		adj = board.getAdjList(18, 21);
 		assertEquals(0, adj.size());
 		
+		
+	}
+	
+	@Test
+	public void testAdjDoors() {
+		//Test beside door to the left, should have adj 3, 
+		//Should include (15,4) and (16,3) and (14,3)
+		Set<BoardCell> adj = board.getAdjList(15, 3);
+		assertTrue(adj.contains(board.getCellAt(16, 3)));
+		assertTrue(adj.contains(board.getCellAt(14, 3)));
+		assertTrue(adj.contains(board.getCellAt(15, 4)));
+		assertEquals(3,adj.size());
+		
+		//Test beside door to the right, and up
+		//Should contain (17, 14) (17, 12) (16, 13) (18, 13)
+		adj = board.getAdjList(17, 13);
+		assertTrue(adj.contains(board.getCellAt(17, 14)));
+		assertTrue(adj.contains(board.getCellAt(17, 12)));
+		assertTrue(adj.contains(board.getCellAt(16, 13)));
+		assertTrue(adj.contains(board.getCellAt(18, 13)));
+		assertEquals(4, adj.size());
+		
+		
+		//Test beside down door
+		//Should contain (5,14) (5, 12), (4,13) (6, 13)
+		
+		adj = board.getAdjList(5, 13);
+		assertTrue(adj.contains(board.getCellAt(5, 14)));
+		assertTrue(adj.contains(board.getCellAt(5, 12)));
+		assertTrue(adj.contains(board.getCellAt(4, 13)));
+		assertTrue(adj.contains(board.getCellAt(6, 13)));
+		assertEquals(4, adj.size());
+
+
+	}
+	
+	@Test
+	public void testingDoorAdj() {
 		
 	}
 
