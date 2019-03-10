@@ -131,13 +131,6 @@ public class Board {
 		
 	}
 
-	public void calcAdjacencies() {
-
-	}
-
-	public void calcTargets(BoardCell cell, int pathLength) {
-
-	}
 	/*
 	 * Function for taking in two file names and assinging them to the board Configuration file and the
 	 * room configuration file. 
@@ -177,6 +170,18 @@ public class Board {
 	 */
 	public BoardCell getCellAt(int row, int col) {
 		return board[row][col]; 
+	}
+	public Set<BoardCell> getAdjList(int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void calcTargets(int i, int j, int k) {
+		// TODO Auto-generated method stub
+		
+	}
+	public Set<BoardCell> getTargets() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
