@@ -28,12 +28,24 @@ public class BoardAdjTargetTests {
 		Set<BoardCell> adj = new HashSet<BoardCell>(); 
 		
 		//Testing walkway with only walkway cells around it
-		
 		adj = board.getAdjList(11, 4);
-		
 		//Should have a size of 4
-		
 		assertEquals(4, adj.size());
+		
+		
+		//Testing left had side of walkway should have 2 adjs being (10, 1) and (11, 0)
+		adj = board.getAdjList(10, 0);
+		assertTrue(adj.contains(board.getCellAt(10, 1)));
+		assertTrue(adj.contains(board.getCellAt(11, 0)));
+		assertEquals(2, adj.size());
+		
+		
+		//Testing the right hand side of the walkway, should have 3 adjs being (6,21) (7,20) (8,21)
+		adj = board.getAdjList(7, 21);
+		assertTrue(adj.contains(board.getCellAt(6, 21)));
+		assertTrue(adj.contains(board.getCellAt(7, 20)));
+		assertTrue(adj.contains(board.getCellAt(8, 21)));
+		assertEquals(3, adj.size());
 		
 		
 		
