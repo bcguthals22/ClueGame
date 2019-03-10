@@ -1,0 +1,53 @@
+commit 643e5b10f9aaa81180fc1e78947746f4e3d95316
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Wed Mar 6 20:28:42 2019 -0700
+
+    Final Commit - All tests pass
+
+commit c51bff3060c29472c468520143c4d65703f8c24e
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Wed Mar 6 19:04:41 2019 -0700
+
+    Added exception for bad config file functionality
+
+commit c8c2be03f2d566c4cc03bdcb1a975dff821563d5
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Wed Mar 6 18:49:40 2019 -0700
+
+    Added getInitial functionality.
+
+commit 803a2f21e04e63a51237cd658da3c5099bee889c
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Wed Mar 6 18:26:03 2019 -0700
+
+    Added doorDirection and isDoor functionality
+
+commit 4aa98e32559d33bef6db667d6bb32778e853605d
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Wed Mar 6 17:16:45 2019 -0700
+
+    Added functionality to loadBoardConfig
+
+commit fe5ea0109af21a1fd0e8c2a8df686f261de29bf5
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Wed Mar 6 16:59:14 2019 -0700
+
+    Added functionality to getLegend
+
+commit 9348ec5cb489381e9efbc71518ce049ee1a78cf3
+Author: Nicholas Wenzel <nwenzel@mines.edu>
+Date:   Tue Mar 5 12:14:35 2019 -0700
+
+    Made stubs for functions in BoardCell and Board
+
+commit 193f05f2c9c071a3de00f8b207374f8605be2fd7
+Author: Nicholas Wenzel <nwenzel@mines.edu>
+Date:   Tue Mar 5 11:56:47 2019 -0700
+
+    Initial Commit
+
+commit c9c1107fc5c919949d3159084939c208f47da0ce
+Author: nicwenzel26 <45695160+nicwenzel26@users.noreply.github.com>
+Date:   Tue Mar 5 11:46:41 2019 -0700
+
+    Initial commit
