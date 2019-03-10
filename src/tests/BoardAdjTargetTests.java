@@ -122,7 +122,32 @@ public class BoardAdjTargetTests {
 	
 	@Test
 	public void testingDoorAdj() {
+		//Testing up door
+		//Should contain 1 (11,0)
+		Set<BoardCell> adj = board.getAdjList(12, 0);
+		assertTrue(adj.contains(board.getCellAt(11, 0)));
+		assertEquals(1, adj.size());
 		
+		//Testing right door
+		//Should contain 1, (17,13)
+		adj = board.getAdjList(17, 12);
+		assertTrue(adj.contains(board.getCellAt(17, 13)));
+		assertEquals(1, adj.size());
+		
+		//Testing down door
+		//Should contain (16,17)
+		adj = board.getAdjList(15, 17);
+		assertTrue(adj.contains(board.getCellAt(16, 17)));
+		assertEquals(1, adj.size());
+		
+		//Testing left door 
+		//Should contain (0,15)
+		adj = board.getAdjList(0, 16);
+		assertTrue(adj.contains(board.getCellAt(0, 15)));
+		assertEquals(1, adj.size()); 
+
+
+
 	}
 
 }
