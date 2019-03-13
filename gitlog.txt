@@ -1,3 +1,57 @@
+commit f3632e4f2d49c2bbc6a3d9fbb262eda166affe2f
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sun Mar 10 15:22:50 2019 -0600
+
+    Final Commit
+
+commit ba2a6fea66574f1ac4a373fc95bb7b908df869cb
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sun Mar 10 15:16:50 2019 -0600
+
+    Final Commit
+
+commit fa094aa8d4f804e345abe449852831bec815d54b
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sun Mar 10 15:13:00 2019 -0600
+
+    Targets tests
+
+commit 1d3b8067238e64fa3f59777269a4155cafeec747
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sun Mar 10 13:52:16 2019 -0600
+
+    Testing door adj
+
+commit aac1266d936f095804c598af784e29b398a0ba72
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sun Mar 10 13:44:30 2019 -0600
+
+    Testing spaces next to doorways
+
+commit 5c8cef803f397b8edbe04e0a9c3ef647dfab03d9
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sun Mar 10 12:53:11 2019 -0600
+
+    Added adj tests for each side of the board
+
+commit a7386d54edc742017834c824a283f082d4794f06
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sun Mar 10 12:44:16 2019 -0600
+
+    Added room adj calcs
+
+commit cd96369f790f6fc0cdd7a5b70d8cb0822966c601
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sun Mar 10 12:25:36 2019 -0600
+
+    Added Colored Map
+
+commit 8aad0064f5a1896851c6881b723c0c37e96161aa
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sun Mar 10 12:23:33 2019 -0600
+
+    Initial Commit
+
 commit 643e5b10f9aaa81180fc1e78947746f4e3d95316
 Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
 Date:   Wed Mar 6 20:28:42 2019 -0700

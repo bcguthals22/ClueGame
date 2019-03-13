@@ -33,6 +33,15 @@ public class BoardCell {
 		}
 	}
 	
+	public boolean isWalkway() {
+		String x = this.getInitial();
+		if(getInitial().equals("W")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 	/*
 	 * Function for returning the direction of the door. 
