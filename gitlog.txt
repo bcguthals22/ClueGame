@@ -1,3 +1,9 @@
+commit 5659d3c3bd5f0a619aa8703286780bea34f2fb2e
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Wed Mar 13 17:53:42 2019 -0600
+
+    Added Functionality so tests pass
+
 commit f3632e4f2d49c2bbc6a3d9fbb262eda166affe2f
 Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
 Date:   Sun Mar 10 15:22:50 2019 -0600
