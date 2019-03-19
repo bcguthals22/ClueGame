@@ -248,7 +248,7 @@ public class Board {
 
 		adjMatrix.put(cell, adj);
 	}
-
+	//Used in case of walkway
 	public void caseWalkway(int row, int col, Set<BoardCell> nextTo, DoorDirection direction) {
 		if ((row < 0) || (col < 0) || (row >= numRows) || (col >= numColumns)) {
 			return;
