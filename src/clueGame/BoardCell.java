@@ -28,7 +28,7 @@ public class BoardCell {
 	 * Else it returns false
 	 */
 	public boolean isDoorway() {
-		if(type.length() == 2 && type.charAt(1) != 'N') {
+		if(type.length() == 2 && firstLetter != 'N') {
 			return true;
 		}
 		else {
@@ -53,17 +53,17 @@ public class BoardCell {
 	 */
 	public DoorDirection getDoorDirection() {
 		if(isDoorway()) {
-			if(type.charAt(1) == 'R') {
+			if(firstLetter == 'R') {
 				return DoorDirection.RIGHT;
 				
 			}
-			else if(type.charAt(1) == 'L') {
+			else if(firstLetter == 'L') {
 				return DoorDirection.LEFT;
 			}
-			else if(type.charAt(1) == 'D') {
+			else if(firstLetter == 'D') {
 				return DoorDirection.DOWN;
 			}
-			else if(type.charAt(1) == 'U') {
+			else if(firstLetter == 'U') {
 				return DoorDirection.UP;
 			}
 			else {
