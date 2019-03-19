@@ -12,12 +12,14 @@ public class BoardCell {
 	
 	private String type;
 	
+	private char firstLetter;
 
 	public BoardCell(int row, int column, String room) {
 		super();
 		this.row = row;
 		this.column = column;
 		this.type = room;
+		firstLetter = type.charAt(1);
 	}
 	
 	/*
