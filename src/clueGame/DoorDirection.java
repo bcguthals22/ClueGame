@@ -6,5 +6,10 @@
 package clueGame;
 
 public enum DoorDirection {
-	UP, DOWN, LEFT, RIGHT, NONE;
+	UP("Up"), DOWN("Down"), LEFT("Left"), RIGHT("Right"), NONE("None");
+	String message;
+	DoorDirection(String message){
+		this.message = message;
+	}
 }
+
