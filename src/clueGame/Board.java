@@ -2,6 +2,7 @@
  * Brennan Guthals & Nicholas Wenzel
  * 3/6/2019
  * ClueGame
+ * 
  */
 package clueGame;
 
@@ -37,9 +38,9 @@ public class Board {
 
 	public String roomConfigFile;
 
-	// variable used for singleton pattern
+	// Variable used for singleton pattern
 	private static Board theInstance = new Board();
-	// constructor is private to ensure only one can be created
+	// Constructor is private to ensure only one can be created
 	private Board() {
 		adjMatrix = new HashMap<BoardCell, Set<BoardCell>>();
 
