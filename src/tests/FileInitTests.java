@@ -31,7 +31,7 @@ public class FileInitTests {
 	@BeforeClass
 	public static void setUp() {
 		board = Board.getInstance();
-		board.setConfigFiles("ClueMap.csv", "ClueMapLegend.txt");		
+		board.setConfigFiles("ClueMap.csv", "ClueMapLegend.txt","Player.txt");	
 		board.initialize();
 	}
 

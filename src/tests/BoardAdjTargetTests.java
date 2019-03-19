@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class BoardAdjTargetTests {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("ClueMap.csv", "ClueMapLegend.txt");		
+		board.setConfigFiles("ClueMap.csv", "ClueMapLegend.txt","Player.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}

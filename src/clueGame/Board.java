@@ -36,6 +36,8 @@ public class Board {
 	public String boardConfigFile;
 
 	public String roomConfigFile;
+	
+	public String playerConfigFile;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -58,7 +60,8 @@ public class Board {
 			loadRoomConfig();
 
 			loadBoardConfig();
-
+			
+			loadPlayerConfig();
 
 		} catch (FileNotFoundException e) {
 			e.getMessage();
@@ -148,10 +151,12 @@ public class Board {
 	 * Function for taking in two file names and assinging them to the board Configuration file and the
 	 * room configuration file. 
 	 */
-	public void setConfigFiles(String board, String room) {
+	public void setConfigFiles(String board, String room, String player) {
 		boardConfigFile = board;
 
 		roomConfigFile = room;
+		
+		playerConfigFile = player;
 
 	}
 
@@ -291,7 +296,7 @@ public class Board {
 	
 	
 	
-	public void loadConfigFile() {
+	public void loadPlayerConfig() {
 		
 	}
 	
