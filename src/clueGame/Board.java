@@ -221,7 +221,7 @@ public class Board {
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
-	//Iterates through each boardcell in boardcell and calls addAdj for each cell
+	//Iterates through each boardcell in boardcell and calls addAdj for each cell 
 	public void calcAdjacencies() {
 		for(int row = 0; row < numRows; row++) {
 			for(int col = 0; col < numColumns;  col++) {
