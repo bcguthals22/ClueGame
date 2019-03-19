@@ -10,7 +10,8 @@ public class BoardCell {
 
 	public int column;
 	
-	public String type;
+	private String type;
+	
 
 	public BoardCell(int row, int column, String room) {
 		super();
