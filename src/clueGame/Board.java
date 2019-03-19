@@ -266,7 +266,7 @@ public class Board {
 			}
 		}
 	}
-
+	//Used in case of door
 	public void caseDoor(int row, int col, Set<BoardCell> nextTo, DoorDirection direction) {
 		if ((direction == DoorDirection.DOWN) && (row + 1 < numRows) && (board[(row + 1)][col].isWalkway())) {
 			nextTo.add(board[(row + 1)][col]);
