@@ -229,7 +229,7 @@ public class Board {
 			}
 		}
 	}
-
+	//Makes adjacency matrix for cell passed in.
 	public void addAdj(int row, int col) {
 		Set<BoardCell> adj = new HashSet();
 		BoardCell cell = getCellAt(row,col);
