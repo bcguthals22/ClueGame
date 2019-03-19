@@ -7,13 +7,13 @@ package clueGame;
 
 import java.io.FileNotFoundException;
 
+
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-
-import com.sun.javafx.collections.MappingChange.Map;
+import java.util.*;
 
 
 
@@ -158,7 +158,7 @@ public class Board {
 	/*
 	 * Returns the legend
 	 */
-	public  java.util.Map<Character, String> getLegend() {
+	public Map<Character, String> getLegend() {
 		return legend;
 
 	}
