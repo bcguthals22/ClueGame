@@ -29,7 +29,7 @@ public class Board {
 	
 	
 	public void initialize() {
-		
+		//test
 	}
 	
 	public void loadRoomConfig() {
