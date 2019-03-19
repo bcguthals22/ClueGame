@@ -287,6 +287,28 @@ public class Board {
 		list = adjMatrix.get(cell);
 		return list;
 	}
+	
+	
+	
+	
+	public void loadConfigFile() {
+		
+	}
+	
+	public void selectAnswer() {
+		
+	}
+	
+	
+	public Card handleSuggestion() {
+		return null; 
+	}
+	
+	
+	
+	public boolean checkAccusation(Solution accusation) {
+		return false; 
+	}
 
 
 }
