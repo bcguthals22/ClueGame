@@ -12,6 +12,8 @@ public class Player {
 	
 	private Color color; 
 	
+	public PlayerType type;
+	
 	
 	public Card disproveSuggestion(Solution suggestion) {
 		

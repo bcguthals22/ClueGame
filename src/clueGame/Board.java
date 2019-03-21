@@ -28,6 +28,8 @@ public class Board {
 	public HashMap<Character, String> legend = new HashMap<Character, String>();
 
 	public HashMap<BoardCell, Set<BoardCell>> adjMatrix;
+	
+	public ArrayList<Card> deck;
 
 	public Set<BoardCell> targets; 
 
