@@ -8,6 +8,7 @@ package clueGame;
 import java.io.FileNotFoundException;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -32,6 +33,10 @@ public class Board {
 	public Set<BoardCell> targets; 
 
 	public Set<BoardCell> visited;
+	
+	public ArrayList<Card> deck;
+	
+	public Set<Player> players;
 
 	public String boardConfigFile;
 
@@ -143,6 +148,21 @@ public class Board {
 		numRows = rows; 
 
 	}
+	
+	/*
+	 * Functions for loading the files for the people in the game 
+	 */
+	public void loadPeopleConfig() {
+		
+	}
+	
+	
+	/*
+	 * Functions for loading the weapons config files 
+	 */
+	public void loadWeaponConfig() {
+		
+	}
 
 	/*
 	 * Function for taking in two file names and assinging them to the board Configuration file and the
@@ -192,6 +212,10 @@ public class Board {
 
 		findTargets(i, j, numSteps);
 	}
+	
+	/*
+	 * Function for finding the targets given the row column and the number of steps 
+	 */
 
 	public void findTargets(int i, int j, int numSteps) {
 		BoardCell startCell = getCellAt(i,j);		
@@ -217,11 +241,17 @@ public class Board {
 		}
 	}
 
-
+	/*
+	 * Returns the targets set of Board Cells
+	 */
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
-
+	
+	
+	/*
+	 *Calculates the adjacencies of the given cell 
+	 */
 	public void calcAdjacencies() {
 		for(int row = 0; row < numRows; row++) {
 			for(int col = 0; col < numColumns;  col++) {
@@ -229,6 +259,10 @@ public class Board {
 			}
 		}
 	}
+	
+	/*
+	 * Adds the adjacencies into the adj matrix 
+	 */
 
 	public void addAdj(int row, int col) {
 		Set<BoardCell> adj = new HashSet();
@@ -248,6 +282,9 @@ public class Board {
 
 		adjMatrix.put(cell, adj);
 	}
+	/*
+	 * Function for walkways 
+	 */
 
 	public void caseWalkway(int row, int col, Set<BoardCell> nextTo, DoorDirection direction) {
 		if ((row < 0) || (col < 0) || (row >= numRows) || (col >= numColumns)) {
@@ -266,6 +303,10 @@ public class Board {
 			}
 		}
 	}
+	
+	/*
+	 * Case for doorways
+	 */
 
 	public void caseDoor(int row, int col, Set<BoardCell> nextTo, DoorDirection direction) {
 		if ((direction == DoorDirection.DOWN) && (row + 1 < numRows) && (board[(row + 1)][col].isWalkway())) {
@@ -281,11 +322,32 @@ public class Board {
 			nextTo.add(board[row][(col + 1)]);
 		}
 	}
+	
+	/*
+	 * Returns the adjacenies list 
+	 */
 	public Set<BoardCell> getAdjList(int i, int j) {
 		Set<BoardCell> list = new HashSet();
 		BoardCell cell = getCellAt(i,j);
 		list = adjMatrix.get(cell);
 		return list;
+	}
+	
+	
+	public void selectAnswer() {
+		
+	}
+	
+	public Card handleSuggestion() {
+		return null;
+	}
+	
+	public boolean checkAccusation(Solution accusation) {
+		return false; 
+	}
+	
+	public void dealCards() {
+		
 	}
 
 
