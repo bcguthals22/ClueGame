@@ -1,3 +1,9 @@
+/*
+ * Brennan Guthals & Nicolas Wenzel
+ * 3/21/2019
+ * CSCI306 ClueGame
+ */
+
 package tests;
 
 import static org.junit.Assert.*;
@@ -30,8 +36,11 @@ public class PlayerTests {
 		//Load player file
 	}
 
-	//Test to see if player is loaded correctly
-	//In this test, see if Human player is loaded correctly
+
+	/*
+	 * Test to see if player is loaded correctly
+	 * In this test, see if Human player is loaded correctly
+	 */
 	@Test
 	public void testPlayer1() {
 		Player player = new Player();
@@ -41,9 +50,12 @@ public class PlayerTests {
 		assertEquals(0,player.getRow());
 		assertEquals(player.type,PlayerType.HUMAN);
 	}
-	
-	//Test to see if player is loaded correctly
-		//In this test, see if Computer player is loaded correctly
+
+	/*
+	 * Test to see if player is loaded correctly
+	 * In this test, see if Computer player is loaded correctly
+	 */
+
 	@Test
 	public void testPlayer3() {
 		Player player = new Player();
@@ -53,9 +65,9 @@ public class PlayerTests {
 		assertEquals(7,player.getRow());
 		assertEquals(player.type,PlayerType.COMPUTER);
 	}
-	
+
 	//Test to see if player is loaded correctly
-		//In this test, see if Computer player is loaded correctly
+	//In this test, see if Computer player is loaded correctly
 	@Test
 	public void testPlayer6() {
 		Player player = new Player();
@@ -65,7 +77,10 @@ public class PlayerTests {
 		assertEquals(8,player.getRow());
 		assertEquals(player.type,PlayerType.COMPUTER);
 	}
-	
+
+	/*
+	 * Tests to see if deck was created properly, checks to see if deck size is correct, and that correct amount of weapons, people, and rooms are in deck.
+	 */
 	@Test
 	public void testCreateCards() {
 		assertEquals(board.deck.size(), 24);
@@ -93,10 +108,21 @@ public class PlayerTests {
 		Card roomCard = new Card("Ballroom",CardType.ROOM);
 		assertTrue(board.deck.contains(roomCard));
 	}
-	
+
+	/*
+	 * Tests to see if each player got the right amount of card, and that after cards were dealt, the deck size is 0
+	 */
 	@Test
 	public void testDealCards() {
-		
+		board.dealCards();
+		assertEquals(board.deck.size(), 0);
+		int handSize = (board.deck.size())/board.players.size();
+		Player player1 = new Player();
+		assertTrue((handSize -1) <= player1.hand.size() && player1.hand.size() <= (handSize+1));
+		Player player2 = new Player();
+		assertTrue((handSize -1) <= player2.hand.size() && player2.hand.size() <= (handSize+1));
+		Player player3 = new Player();
+		assertTrue((handSize -1) <= player3.hand.size() && player3.hand.size() <= (handSize+1));
 	}
 
 }

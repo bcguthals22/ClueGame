@@ -28,7 +28,7 @@ public class Board {
 	public HashMap<Character, String> legend = new HashMap<Character, String>();
 
 	public HashMap<BoardCell, Set<BoardCell>> adjMatrix;
-	
+
 	public ArrayList<Card> deck;
 
 	public Set<BoardCell> targets; 
@@ -38,8 +38,10 @@ public class Board {
 	public String boardConfigFile;
 
 	public String roomConfigFile;
-	
+
 	public String playerConfigFile;
+
+	public Set<Player> players;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -62,7 +64,7 @@ public class Board {
 			loadRoomConfig();
 
 			loadBoardConfig();
-			
+
 			loadPlayerConfig();
 
 		} catch (FileNotFoundException e) {
@@ -157,7 +159,7 @@ public class Board {
 		boardConfigFile = board;
 
 		roomConfigFile = room;
-		
+
 		playerConfigFile = player;
 
 	}
@@ -294,25 +296,28 @@ public class Board {
 		list = adjMatrix.get(cell);
 		return list;
 	}
-	
-	
-	
-	
+
+
+
+
 	public void loadPlayerConfig() {
-		
+
 	}
-	
+
 	public void selectAnswer() {
-		
+
 	}
-	
-	
+
+
 	public Card handleSuggestion() {
 		return null; 
 	}
-	
-	
-	
+
+	public void dealCards() {
+
+	}
+
+
 	public boolean checkAccusation(Solution accusation) {
 		return false; 
 	}
