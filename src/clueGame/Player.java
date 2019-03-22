@@ -47,7 +47,29 @@ public class Player {
 	public Color getColor() {
 		return color;
 	}
+	public PlayerType getType() {
+		return type;
+	}
 
+	public void setType(PlayerType type) {
+		this.type = type;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public void setColumn(int column) {
+		this.column = column;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
 
 
 }

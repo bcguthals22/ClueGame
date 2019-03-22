@@ -5,9 +5,11 @@
  */
 package clueGame;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 
 import java.io.FileReader;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -34,9 +36,9 @@ public class Board {
 
 	public Set<BoardCell> visited;
 	
-	public ArrayList<Card> deck;
+	public ArrayList<Card> deck = new ArrayList<Card>();
 	
-	public Set<Player> players;
+	public ArrayList<Player> players = new ArrayList<Player>();
 
 	public String boardConfigFile;
 
@@ -63,6 +65,8 @@ public class Board {
 			loadRoomConfig();
 
 			loadBoardConfig();
+			
+			loadPeopleConfig("Player1.txt");
 
 
 		} catch (FileNotFoundException e) {
@@ -152,7 +156,38 @@ public class Board {
 	/*
 	 * Functions for loading the files for the people in the game 
 	 */
-	public void loadPeopleConfig() {
+	public void loadPeopleConfig(String player) throws FileNotFoundException {
+		FileReader reader = new FileReader(player);
+		Scanner in = new Scanner(reader);
+		
+		Player newPlayer = new Player();
+		
+		newPlayer.setPlayerName(in.nextLine());
+		
+		String startingLoc = in.nextLine(); 
+		
+		String rowC = startingLoc.substring(0, 1);
+		String colC = startingLoc.substring(2); 
+		
+		newPlayer.setRow(Integer.parseInt(rowC));
+		newPlayer.setColumn(Integer.parseInt(colC));
+		
+		String playerColor = in.nextLine();
+		
+		newPlayer.setColor(convertColor(playerColor));
+		
+		String pType = in.nextLine();
+		
+		if(pType.contains("Human")) {
+			newPlayer.setType(PlayerType.HUMAN);
+		}
+		
+		else {
+			newPlayer.setType(PlayerType.COMPUTER);
+		}
+		
+		players.add(newPlayer); 
+		
 		
 	}
 	
@@ -348,6 +383,23 @@ public class Board {
 	
 	public void dealCards() {
 		
+	}
+	
+	
+	/*
+	 * Function for converting a string to a color
+	 */
+	public Color convertColor(String strColor) {
+		Color color;
+		
+		try {
+			Field field = Class.forName("java.awt.Color").getField(strColor.trim());
+			color = (Color)field.get(null);
+			
+		} catch (Exception e) {
+			color = null;
+		}
+		return color;
 	}
 
 
