@@ -194,7 +194,7 @@ public class Board {
 			human.setRow(Integer.parseInt(line[0]));
 			human.setColumn(Integer.parseInt(line[1]));
 			human.setType(PlayerType.HUMAN);
-			
+		
 			players.add(human);
 		}
 		
@@ -210,6 +210,9 @@ public class Board {
 			
 		}
 		
+		Card card = new Card(PlayerName, CardType.PERSON);
+		
+		deck.add(card);
 		
 		
 	}
