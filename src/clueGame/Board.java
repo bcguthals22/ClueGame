@@ -423,6 +423,10 @@ public class Board {
 	public boolean checkAccusation(Solution accusation) {
 		return false; 
 	}
+	/*
+	 * Function for dealing the cards to each player
+	 * Random selectiion of cards and goes to each player sequentially. 
+	 */
 	
 	public void dealCards() {
 		ArrayList<Card> vist = new ArrayList<Card>();
