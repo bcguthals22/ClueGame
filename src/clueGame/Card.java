@@ -18,4 +18,11 @@ public class Card {
 		this.cardName = name;
 		this.type = type;
 	}
+
+	public String getCardName() {
+		return cardName;
+	}
+	
+ 
+
 }

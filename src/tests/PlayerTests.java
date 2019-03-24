@@ -89,13 +89,14 @@ public class PlayerTests {
 	 * Tests to see if deck was created properly, checks to see if deck size is correct, and that correct amount of weapons, people, and rooms are in deck.
 	 */
 	
-	/*
+	
 	@Test
 	public void testCreateCards() {
-		assertEquals(board.deck.size(), 24);
+		assertEquals(board.deck.size(), 23);
 		int countWeapon = 0;
 		int countPerson = 0;
 		int countRoom = 0;
+		
 		for(Card i: board.deck) {
 			if(i.type == CardType.WEAPON) {
 				countWeapon++;
@@ -108,14 +109,30 @@ public class PlayerTests {
 			}
 		}
 		assertEquals(countWeapon, 6);
-		assertEquals(countRoom, 12);
+		assertEquals(countRoom, 11);
 		assertEquals(countPerson, 6);
-		Card personCard = new Card("Steve",CardType.PERSON);
-		assertTrue(board.deck.contains(personCard));
-		Card weaponCard = new Card("Pipe",CardType.WEAPON);
-		assertTrue(board.deck.contains(weaponCard));
-		Card roomCard = new Card("Ballroom",CardType.ROOM);
-		assertTrue(board.deck.contains(roomCard));
+		
+		boolean person = false;
+		boolean wep = false;
+		boolean place = false; 
+		
+		for(Card card: board.deck) {
+			if(card.getCardName().contains("Garrus Vakarian")) {
+				person = true; 
+			}
+			if (card.getCardName().contains("Revolver")) {
+				wep = true; 
+			}
+			
+			if (card.getCardName().contains("Ballroom")) {
+				place = true; 
+			}
+		}
+		
+		
+		assertTrue(person); 
+		assertTrue(wep);
+		assertTrue(place); 
 	}
 
 	/*

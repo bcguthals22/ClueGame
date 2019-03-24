@@ -36,7 +36,7 @@ public class Board {
 
 	public Set<BoardCell> visited;
 	
-	public ArrayList<Card> deck = new ArrayList<Card>();
+	public Set<Card> deck = new HashSet<Card>();
 	
 	public ArrayList<Player> players = new ArrayList<Player>();
 
@@ -111,13 +111,12 @@ public class Board {
 				throw new BadConfigFormatException("Not a valid type: " + card);
 			}
 			
+			roomName = roomName.substring(1); 
+			
 			if(card.contains("Card")) {
 				Card newCard = new Card(roomName, CardType.ROOM);
 				deck.add(newCard);
 			}
-
-			roomName = roomName.substring(1); 
-
 			char c = character.charAt(0); 
 
 			legend.put(c, roomName);
