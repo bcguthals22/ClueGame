@@ -77,6 +77,9 @@ public class Board {
 			loadPeopleConfig("Player5.txt");
 			
 			loadPeopleConfig("Player6.txt");
+			
+			loadWeaponConfig();
+			
 
 
 		} catch (FileNotFoundException e) {
@@ -106,6 +109,11 @@ public class Board {
 
 			if((!card.contains("Card") && (!card.contains("Other")))) {
 				throw new BadConfigFormatException("Not a valid type: " + card);
+			}
+			
+			if(card.contains("Card")) {
+				Card newCard = new Card(roomName, CardType.ROOM);
+				deck.add(newCard);
 			}
 
 			roomName = roomName.substring(1); 
@@ -221,8 +229,17 @@ public class Board {
 	/*
 	 * Functions for loading the weapons config files 
 	 */
-	public void loadWeaponConfig() {
+	public void loadWeaponConfig() throws FileNotFoundException {
+		FileReader reader = new FileReader("Weapons.txt"); 
+		Scanner in = new Scanner(reader); 
 		
+		while(in.hasNextLine()) {
+			String weapon = in.nextLine();
+			
+			Card card = new Card(weapon, CardType.WEAPON);
+			
+			deck.add(card); 
+		}
 	}
 
 	/*
