@@ -41,11 +41,13 @@ public class PlayerTests {
 	 * Test to see if player is loaded correctly
 	 * In this test, see if Human player is loaded correctly
 	 */
+	
+	
 	@Test
 	public void testPlayer1() {
-		Player player = new Player();
-		assertEquals("Steve",player.getPlayerName());
-		assertEquals(Color.blue,player.getColor());
+		Player player = board.players.get(0);
+		assertEquals("Mal Reynolds",player.getPlayerName());
+		assertEquals(Color.red,player.getColor());
 		assertEquals(0,player.getColumn());
 		assertEquals(0,player.getRow());
 		assertEquals(player.type,PlayerType.HUMAN);
@@ -55,7 +57,8 @@ public class PlayerTests {
 	 * Test to see if player is loaded correctly
 	 * In this test, see if Computer player is loaded correctly
 	 */
-
+	
+	/*
 	@Test
 	public void testPlayer3() {
 		Player player = new Player();
@@ -69,6 +72,8 @@ public class PlayerTests {
 	//Test to see if player is loaded correctly
 	//In this test, see if Computer player is loaded correctly
 	@Test
+	
+	
 	public void testPlayer6() {
 		Player player = new Player();
 		assertEquals("Ralf",player.getPlayerName());
@@ -81,6 +86,8 @@ public class PlayerTests {
 	/*
 	 * Tests to see if deck was created properly, checks to see if deck size is correct, and that correct amount of weapons, people, and rooms are in deck.
 	 */
+	
+	/*
 	@Test
 	public void testCreateCards() {
 		assertEquals(board.deck.size(), 24);
@@ -112,6 +119,8 @@ public class PlayerTests {
 	/*
 	 * Tests to see if each player got the right amount of card, and that after cards were dealt, the deck size is 0
 	 */
+	
+	/*
 	@Test
 	public void testDealCards() {
 		board.dealCards();
@@ -124,5 +133,7 @@ public class PlayerTests {
 		Player player3 = new Player();
 		assertTrue((handSize -1) <= player3.hand.size() && player3.hand.size() <= (handSize+1));
 	}
+	*/
+	
 
 }
