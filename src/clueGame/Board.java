@@ -69,6 +69,14 @@ public class Board {
 			loadPeopleConfig("Player1.txt");
 			
 			loadPeopleConfig("Player2.txt"); 
+			
+			loadPeopleConfig("Player3.txt");
+			
+			loadPeopleConfig("Player4.txt");
+			
+			loadPeopleConfig("Player5.txt");
+			
+			loadPeopleConfig("Player6.txt");
 
 
 		} catch (FileNotFoundException e) {

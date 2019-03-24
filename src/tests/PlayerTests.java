@@ -58,28 +58,30 @@ public class PlayerTests {
 	 * In this test, see if Computer player is loaded correctly
 	 */
 	
-	/*
+	
 	@Test
 	public void testPlayer3() {
-		Player player = new Player();
-		assertEquals("Jeph",player.getPlayerName());
-		assertEquals(Color.red,player.getColor());
-		assertEquals(5,player.getColumn());
-		assertEquals(7,player.getRow());
+		Player player = board.players.get(2);
+		assertEquals("Garrus Vakarian",player.getPlayerName());
+		assertEquals(Color.blue,player.getColor());
+		assertEquals(15,player.getColumn());
+		assertEquals(10,player.getRow());
 		assertEquals(player.type,PlayerType.COMPUTER);
 	}
 
 	//Test to see if player is loaded correctly
 	//In this test, see if Computer player is loaded correctly
+	
+	
 	@Test
 	
 	
 	public void testPlayer6() {
-		Player player = new Player();
-		assertEquals("Ralf",player.getPlayerName());
+		Player player = board.players.get(5);
+		assertEquals("John Galt",player.getPlayerName());
 		assertEquals(Color.black,player.getColor());
-		assertEquals(2,player.getColumn());
-		assertEquals(8,player.getRow());
+		assertEquals(15,player.getColumn());
+		assertEquals(20,player.getRow());
 		assertEquals(player.type,PlayerType.COMPUTER);
 	}
 
