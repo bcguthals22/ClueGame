@@ -67,6 +67,8 @@ public class Board {
 			loadBoardConfig();
 			
 			loadPeopleConfig("Player1.txt");
+			
+			loadPeopleConfig("Player2.txt"); 
 
 
 		} catch (FileNotFoundException e) {
@@ -166,8 +168,7 @@ public class Board {
 		
 		String startingLoc = in.nextLine(); 
 		
-		String rowC = startingLoc.substring(0, 1);
-		String colC = startingLoc.substring(2); 
+		String[] line = startingLoc.split(" ");
 		
 		
 		
@@ -182,8 +183,8 @@ public class Board {
 			
 			human.setPlayerName(PlayerName);
 			human.setColor(play_Color);
-			human.setRow(Integer.parseInt(rowC));
-			human.setColumn(Integer.parseInt(colC));
+			human.setRow(Integer.parseInt(line[0]));
+			human.setColumn(Integer.parseInt(line[1]));
 			human.setType(PlayerType.HUMAN);
 			
 			players.add(human);
@@ -193,8 +194,8 @@ public class Board {
 			ComputerPlayer comp = new ComputerPlayer();
 			comp.setPlayerName(PlayerName);
 			comp.setColor(play_Color);
-			comp.setRow(Integer.parseInt(rowC));
-			comp.setColumn(Integer.parseInt(colC));
+			comp.setRow(Integer.parseInt(line[0]));
+			comp.setColumn(Integer.parseInt(line[1]));
 			comp.setType(PlayerType.COMPUTER);
 			
 			players.add(comp); 
