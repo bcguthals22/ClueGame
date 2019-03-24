@@ -160,33 +160,47 @@ public class Board {
 		FileReader reader = new FileReader(player);
 		Scanner in = new Scanner(reader);
 		
-		Player newPlayer = new Player();
+		String PlayerName;
 		
-		newPlayer.setPlayerName(in.nextLine());
+		PlayerName = in.nextLine();
 		
 		String startingLoc = in.nextLine(); 
 		
 		String rowC = startingLoc.substring(0, 1);
 		String colC = startingLoc.substring(2); 
 		
-		newPlayer.setRow(Integer.parseInt(rowC));
-		newPlayer.setColumn(Integer.parseInt(colC));
+		
 		
 		String playerColor = in.nextLine();
 		
-		newPlayer.setColor(convertColor(playerColor));
+		Color play_Color = convertColor(playerColor);
 		
 		String pType = in.nextLine();
 		
 		if(pType.contains("Human")) {
-			newPlayer.setType(PlayerType.HUMAN);
+			HumanPlayer human = new HumanPlayer();
+			
+			human.setPlayerName(PlayerName);
+			human.setColor(play_Color);
+			human.setRow(Integer.parseInt(rowC));
+			human.setColumn(Integer.parseInt(colC));
+			human.setType(PlayerType.HUMAN);
+			
+			players.add(human);
 		}
 		
 		else {
-			newPlayer.setType(PlayerType.COMPUTER);
+			ComputerPlayer comp = new ComputerPlayer();
+			comp.setPlayerName(PlayerName);
+			comp.setColor(play_Color);
+			comp.setRow(Integer.parseInt(rowC));
+			comp.setColumn(Integer.parseInt(colC));
+			comp.setType(PlayerType.COMPUTER);
+			
+			players.add(comp); 
+			
 		}
 		
-		players.add(newPlayer); 
 		
 		
 	}
