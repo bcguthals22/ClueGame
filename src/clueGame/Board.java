@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -36,7 +37,7 @@ public class Board {
 
 	public Set<BoardCell> visited;
 	
-	public Set<Card> deck = new HashSet<Card>();
+	public ArrayList<Card> deck = new ArrayList<Card>();
 	
 	public ArrayList<Player> players = new ArrayList<Player>();
 
@@ -424,6 +425,37 @@ public class Board {
 	}
 	
 	public void dealCards() {
+		ArrayList<Card> vist = new ArrayList<Card>();
+		int playerCount = 0;
+		while(vist.size() != 23) {
+			int num = new Random().nextInt(deck.size());
+			Card card = deck.get(num);
+			
+			if (vist.contains(card)) {
+				continue;
+			}
+			
+			else {
+				
+				Player player = players.get(playerCount);
+				
+				player.hand.add(card);
+				
+				vist.add(card);
+				
+				players.set(playerCount, player);
+				
+				playerCount++;
+				
+				if(playerCount == 6) {
+					playerCount = 0;
+				}
+				
+			}
+		}
+		
+		
+		
 		
 	}
 	

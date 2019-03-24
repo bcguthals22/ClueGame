@@ -139,20 +139,20 @@ public class PlayerTests {
 	 * Tests to see if each player got the right amount of card, and that after cards were dealt, the deck size is 0
 	 */
 	
-	/*
+
 	@Test
 	public void testDealCards() {
 		board.dealCards();
-		assertEquals(board.deck.size(), 0);
+	
 		int handSize = (board.deck.size())/board.players.size();
-		Player player1 = new Player();
+		Player player1 = board.players.get(0);
 		assertTrue((handSize -1) <= player1.hand.size() && player1.hand.size() <= (handSize+1));
-		Player player2 = new Player();
-		assertTrue((handSize -1) <= player2.hand.size() && player2.hand.size() <= (handSize+1));
-		Player player3 = new Player();
+		Player player3 = board.players.get(2);
 		assertTrue((handSize -1) <= player3.hand.size() && player3.hand.size() <= (handSize+1));
+		Player player6 = board.players.get(5); 
+		assertTrue((handSize -1) <= player6.hand.size() && player6.hand.size() <= (handSize+1));
 	}
-	*/
+
 	
 
 }

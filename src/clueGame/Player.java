@@ -21,7 +21,7 @@ public class Player {
 
 	public PlayerType type;
 
-	public ArrayList<Card> hand;
+	public ArrayList<Card> hand = new ArrayList<Card>();
 
 
 	public Card disproveSuggestion(Solution suggestion) {
