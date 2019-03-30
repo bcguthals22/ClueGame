@@ -27,4 +27,29 @@ public class gameActionTests {
 	public static void setUp() {
 		
 	}
+	
+	@Test
+	public void testSelectTargets() {
+		
+	}
+	
+	@Test
+	public void testMakeAccustation() {
+		
+	}
+	
+	@Test
+	public void testCreateSuggestion() {
+		
+	}
+	
+	@Test
+	public void testDisproveSuggestion() {
+		
+	}
+	
+	@Test
+	public void testHandleSuggestion() {
+		
+	}
 }
