@@ -4,6 +4,7 @@ import java.util.Set;
 
 public class ComputerPlayer extends Player {
 	
+	private char lastVisitedRoom;
 	
 	public ComputerPlayer() {
 		super();
@@ -19,5 +20,9 @@ public class ComputerPlayer extends Player {
 	
 	public void createSuggestion() {
 		
+	}
+	
+	public void setLastVisited(char c) {
+		this.lastVisitedRoom = c;
 	}
 }
