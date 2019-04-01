@@ -17,8 +17,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
-import com.sun.javafx.collections.MappingChange.Map;
-
+import java.util.*;
 
 
 
@@ -44,6 +43,8 @@ public class Board {
 	public String boardConfigFile;
 
 	public String roomConfigFile;
+	
+	private static Solution answer;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -256,7 +257,7 @@ public class Board {
 	/*
 	 * Returns the legend
 	 */
-	public  java.util.Map<Character, String> getLegend() {
+	public Map<Character, String> getLegend() {
 		return legend;
 
 	}
@@ -411,6 +412,12 @@ public class Board {
 		return list;
 	}
 	
+	//Function to allow for testing
+	public void setAnswer(Solution solution) {
+		answer.person = solution.person;
+		answer.room = solution.room;
+		answer.weapon = solution.weapon;
+	}
 	
 	public void selectAnswer() {
 		
