@@ -39,28 +39,42 @@ public class ComputerPlayer extends Player {
 	public void createSuggestion(String room) {
 		suggestion.room = room;
 		
-		ArrayList<Player> people= new ArrayList();
+		ArrayList<Card> people= new ArrayList();
+		
 		ArrayList<Card> weapons = new ArrayList();
-		
-		for(Player p : Board.getInstance().players) {
-			Card person = new Card(p.getPlayerName(),CardType.PERSON);
-			if(!seenCards.contains(person)) {
-				people.add(p);
-			}
-		}
-		
+			
 		for(Card c : Board.getInstance().deck) {
-			if(!seenCards.contains(c)) {
-				weapons.add(c);
+			boolean notSeen = false;
+			int counter = 0;
+			String deckCardName = c.getCardName();
+			for(Card card : seenCards) {
+				String seenCardName = card.getCardName();
+				
+				if(seenCardName.contains(deckCardName)) {
+					continue;
+				}
+				if(c.type.equals(CardType.ROOM)) {
+					continue;
+				}
+				counter++;
+			}
+			if(counter == seenCards.size()) {
+				if(c.type.equals(CardType.PERSON)) {
+					people.add(c);
+				}
+				else if(c.type.equals(CardType.WEAPON)) {
+					weapons.add(c);
+				}
 			}
 		}
 		
 		Random rand = new Random();
 		
 		int random = rand.nextInt(people.size());
-		suggestion.person = people.get(random).getPlayerName();
+		suggestion.person = people.get(random).getCardName();
 		random = rand.nextInt(weapons.size());
 		suggestion.weapon = weapons.get(random).getCardName();
+		
 	}
 	
 	//Function to allow for proper testing

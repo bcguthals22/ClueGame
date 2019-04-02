@@ -37,7 +37,7 @@ public class Board {
 	public Set<BoardCell> visited;
 	
 	public ArrayList<Card> deck = new ArrayList<Card>();
-	
+		
 	public ArrayList<Player> players = new ArrayList<Player>();
 
 	public String boardConfigFile;

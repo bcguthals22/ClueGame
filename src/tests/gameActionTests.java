@@ -40,11 +40,15 @@ public class gameActionTests {
 	Card garrusCard = new Card("Garrus Vakarian", CardType.PERSON);
 	Card jimCard = new Card("Jim Holden", CardType.PERSON);
 	Card taliCard = new Card("Tali Zorah", CardType.PERSON);
+	Card malCard = new Card("Mal Reynolds", CardType.PERSON);
+	Card johnCard = new Card("John Galt", CardType.PERSON);
 	//Weapon cards
 	Card revolverCard = new Card("Revolver", CardType.WEAPON);
 	Card wrenchCard = new Card("Wrench", CardType.WEAPON);
 	Card ropeCard = new Card("Rope", CardType.WEAPON);
 	Card knifeCard = new Card("Knife", CardType.WEAPON);
+	Card candleCard = new Card("Candle Stick", CardType.WEAPON);
+	Card leadCard = new Card("Lead Pipe", CardType.WEAPON);
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -157,17 +161,19 @@ public class gameActionTests {
 	public void testCreateSuggestion() {
 		ComputerPlayer player = new ComputerPlayer("Jim Holden", 0, 0, Color.black);
 		
-	
-		
 		//Add all person cards to seen except the anticipated suggested
 		player.updateSeenCards(garrusCard);
 		player.updateSeenCards(jimCard);
 		player.updateSeenCards(amosCard);
+		player.updateSeenCards(malCard);
+		player.updateSeenCards(johnCard);
 		
 		//Add all weapon cards to seen except the anticipated suggested
 		player.updateSeenCards(wrenchCard);
 		player.updateSeenCards(ropeCard);
 		player.updateSeenCards(knifeCard);
+		player.updateSeenCards(leadCard);
+		player.updateSeenCards(candleCard);
 		
 		
 		player.createSuggestion("Archery Room");
