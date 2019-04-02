@@ -12,4 +12,8 @@ public class Solution {
 		this.room = room;
 		this.weapon = weapon;
 	}
+	
+	public Solution() {
+		
+	}
 }
