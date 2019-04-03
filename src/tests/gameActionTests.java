@@ -192,12 +192,15 @@ public class gameActionTests {
 		//Add all person cards to seen except 2 anticipated suggestions
 		player.updateSeenCards(garrusCard);
 		player.updateSeenCards(jimCard);
+		player.updateSeenCards(malCard);
+		player.updateSeenCards(johnCard);
 		
 		//Add all weapon cards to seen except 2 anticipated suggestions
 		player.updateSeenCards(wrenchCard);
 		player.updateSeenCards(ropeCard);
+		player.updateSeenCards(leadCard);
+		player.updateSeenCards(candleCard);
 
-		player.createSuggestion("Ballroom");
 		boolean guessAmos = false;
 		boolean guessTali = false;
 		boolean guessKnife = false;
@@ -205,6 +208,7 @@ public class gameActionTests {
 		
 		//Run a lot of times to allow for random picks
 		for(int i = 0; i < 100; i++) {
+			player.createSuggestion("Ballroom");
 			if(player.getSuggestedPerson().contentEquals("Amos Lee")) {
 				guessAmos = true;
 			}
