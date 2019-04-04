@@ -63,6 +63,9 @@ public class gameActionTests {
 		
 	}
 	
+	/*
+	 * Test to see how computer player will pick a target when no doors are present 
+	 */
 	@Test
 	public void testTargetRandom() {
 		ComputerPlayer player = new ComputerPlayer();
@@ -93,6 +96,9 @@ public class gameActionTests {
 		assertTrue(location2);
 	}
 	
+	/*
+	 * Test to see how computer player will pick a target door is present
+	 */
 	@Test
 	public void testTargetRoom() {
 		ComputerPlayer player = new ComputerPlayer();
@@ -110,6 +116,9 @@ public class gameActionTests {
 		}
 	}
 	
+	/*
+	 * Test to see how computer player will pick a target door is present but is also last visited
+	 */
 	@Test
 	public void testTargetRoomLastVisited() {
 		ComputerPlayer player = new ComputerPlayer();
@@ -145,6 +154,9 @@ public class gameActionTests {
 		assertTrue(location3);
 	}
 	
+	/*
+	 * Test to see if computer player can make an accusation correctly
+	 */
 	@Test
 	public void testMakeAccustation() {
 		//Set sample solution
@@ -158,6 +170,9 @@ public class gameActionTests {
 		assertFalse(board.checkAccusation(new Solution("Garrus Vakarian","Gallery","Revolver")));
 	}
 	
+	/*
+	 * Test to see how computer player will create a suggestion and if in the expected manner
+	 */
 	@Test
 	public void testCreateSuggestion() {
 		ComputerPlayer player = new ComputerPlayer("Jim Holden", 0, 0, Color.black);
@@ -185,6 +200,9 @@ public class gameActionTests {
 		
 	}
 	
+	/*
+	 * Test to see how computer player will create a suggestion when it has multiple unseen cards and if in the expected manner
+	 */
 	@Test
 	public void testCreateSuggestionMultiple() {
 		ComputerPlayer player = new ComputerPlayer("Jim Holden", 0, 0, Color.black);
@@ -234,6 +252,9 @@ public class gameActionTests {
 
 	}
 	
+	/*
+	 * Test to see how computer player will disprove with one card match
+	 */
 	@Test
 	public void testDisproveSuggestionOneMatch() {
 		ComputerPlayer player = new ComputerPlayer("Amos Lee", 1, 1, Color.red);
@@ -255,6 +276,9 @@ public class gameActionTests {
 		assertEquals(jimCard,player.disproveSuggestion(suggestion));
 	}
 	
+	/*
+	 * Test to see how computer player will disprove with multiple card match
+	 */
 	@Test
 	public void testDisproveSuggestionsMultMatch() {
 		ComputerPlayer player = new ComputerPlayer("Amos Lee", 1, 1, Color.red);
@@ -270,10 +294,12 @@ public class gameActionTests {
 		player.hand.add(ballroomCard);
 		player.hand.add(jimCard);
 		
+		//Cards that should be picked to disprove
 		boolean returnJim = false;
 		boolean returnBallroom = false;
 		boolean returnWrench = false;
 		
+		//Run a lot of times to allow for each to be picked
 		for(int i = 0; i < 100; i++) {
 			Card returnFromDisprove = player.disproveSuggestion(suggestion);
 			
@@ -293,6 +319,9 @@ public class gameActionTests {
 		assertTrue(returnWrench);
 	}
 	
+	/*
+	 * Test to make sure suggestions are handled correctly by the game board
+	 */
 	@Test
 	public void testHandleSuggestion() {
 		ArrayList<Player> players = new ArrayList();

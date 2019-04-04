@@ -435,7 +435,8 @@ public class Board {
 			Player player = (Player)players.get(currentPlayer);
 			
 			if(player != accusingPlayer) {
-				Card card = player.disproveSuggestion(suggestion);
+				Card card = new Card();
+				card = player.disproveSuggestion(suggestion);
 				
 				if(card != null) {
 					for(Player p: players) {
