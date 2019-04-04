@@ -20,13 +20,11 @@ public class Player {
 
 	private Color color; 
 	
-	private ArrayList<Card> cards = new ArrayList();
-
 	public PlayerType type;
 
-	public ArrayList<Card> hand = new ArrayList<Card>();
+	public ArrayList<Card> hand = new ArrayList();
 	
-	public ArrayList<Card> seenCards;
+	public ArrayList<Card> seenCards = new ArrayList();
 
 	public Player() {
 		
@@ -67,7 +65,7 @@ public class Player {
 	
 	
 	public void addCard(Card card) {
-		cards.add(card);
+		hand.add(card);
 	}
 	
 	public void updateSeenCards(Card card) {
