@@ -6,16 +6,16 @@ import java.util.Random;
 import java.util.Set;
 
 public class ComputerPlayer extends Player {
-	
+
 	private char lastVisitedRoom;
-	
+
 	private Solution suggestion;
-	
+
 	public ComputerPlayer() {
 		seenCards = new ArrayList();
 		suggestion = new Solution();
 	}
-	
+
 	public ComputerPlayer(String name, int row, int col, Color color) {
 		super();
 		this.setPlayerName(name);
@@ -25,7 +25,7 @@ public class ComputerPlayer extends Player {
 		seenCards = new ArrayList();
 		suggestion = new Solution();
 	}
-	
+
 	public BoardCell pickLocation(Set<BoardCell> targets) {
 		Random rand = new Random();
 		BoardCell pick = new BoardCell();
@@ -37,35 +37,35 @@ public class ComputerPlayer extends Player {
 				lastVisitedRoom = cell.getInitial().charAt(0);
 				return cell;
 			}
-			
+
 			if(index == counter) {
 				pick = cell;
 			}
 			counter++;
 
 		}
-		
-		
+
+
 		return pick; 
 	}
-	
+
 	public void makeAccusation(Solution accusation) {
 	}
-	
+
 	public void createSuggestion(String room) {
 		suggestion.room = room;
-		
+
 		ArrayList<Card> people= new ArrayList();
-		
+
 		ArrayList<Card> weapons = new ArrayList();
-			
+
 		for(Card c : Board.getInstance().deck) {
 			boolean notSeen = false;
 			int counter = 0;
 			String deckCardName = c.getCardName();
 			for(Card card : seenCards) {
 				String seenCardName = card.getCardName();
-				
+
 				if(seenCardName.contains(deckCardName)) {
 					continue;
 				}
@@ -83,36 +83,36 @@ public class ComputerPlayer extends Player {
 				}
 			}
 		}
-		
+
 		Random rand = new Random();
-		
+
 		int random = rand.nextInt(people.size());
 		suggestion.person = people.get(random).getCardName();
 		random = rand.nextInt(weapons.size());
 		suggestion.weapon = weapons.get(random).getCardName();
-		
+
 	}
-	
+
 	//Function to allow for proper testing
 	public void setLastVisited(char c) {
 		this.lastVisitedRoom = c;
 	}
-	
+
 	public Solution getSuggestion() {
-		
+
 		return null;
 	}
-	
+
 	public String getSuggestedRoom() {
 		return suggestion.room;
 	}
-	
+
 	public String getSuggestedWeapon() {
 		return suggestion.weapon;
 	}
-	
+
 	public String getSuggestedPerson() {
 		return suggestion.person;
 	}
-	
+
 }

@@ -19,17 +19,17 @@ public class Player {
 	private int column; 
 
 	private Color color; 
-	
+
 	public PlayerType type;
 
 	public ArrayList<Card> hand = new ArrayList();
-	
+
 	public ArrayList<Card> seenCards = new ArrayList();
 
 	public Player() {
-		
+
 	}
-	
+
 	public Player(String name, int row, int col, Color color) {
 		this.playerName = name;
 		this.row = row;
@@ -62,17 +62,17 @@ public class Player {
 		return null;
 	}
 
-	
-	
+
+
 	public void addCard(Card card) {
 		hand.add(card);
 	}
-	
+
 	public void updateSeenCards(Card card) {
 		seenCards.add(card);
 	}
 
-	
+
 	public String getPlayerName() {
 		return playerName;
 	}

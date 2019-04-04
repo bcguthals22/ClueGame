@@ -35,15 +35,15 @@ public class Board {
 	public Set<BoardCell> targets; 
 
 	public Set<BoardCell> visited;
-	
+
 	public ArrayList<Card> deck = new ArrayList<Card>();
-		
+
 	public ArrayList<Player> players = new ArrayList<Player>();
 
 	public String boardConfigFile;
 
 	public String roomConfigFile;
-	
+
 	private Solution answer;
 	//Variable used for testing
 	public String playerDisprove;
@@ -69,21 +69,21 @@ public class Board {
 			loadRoomConfig();
 
 			loadBoardConfig();
-			
+
 			loadPeopleConfig("Player1.txt");
-			
+
 			loadPeopleConfig("Player2.txt"); 
-			
+
 			loadPeopleConfig("Player3.txt");
-			
+
 			loadPeopleConfig("Player4.txt");
-			
+
 			loadPeopleConfig("Player5.txt");
-			
+
 			loadPeopleConfig("Player6.txt");
-			
+
 			loadWeaponConfig();
-			
+
 
 
 		} catch (FileNotFoundException e) {
@@ -114,9 +114,9 @@ public class Board {
 			if((!card.contains("Card") && (!card.contains("Other")))) {
 				throw new BadConfigFormatException("Not a valid type: " + card);
 			}
-			
+
 			roomName = roomName.substring(1); 
-			
+
 			if(card.contains("Card")) {
 				Card newCard = new Card(roomName, CardType.ROOM);
 				deck.add(newCard);
@@ -173,42 +173,42 @@ public class Board {
 		numRows = rows; 
 
 	}
-	
+
 	/*
 	 * Functions for loading the files for the people in the game 
 	 */
 	public void loadPeopleConfig(String player) throws FileNotFoundException {
 		FileReader reader = new FileReader(player);
 		Scanner in = new Scanner(reader);
-		
+
 		String PlayerName;
-		
+
 		PlayerName = in.nextLine();
-		
+
 		String startingLoc = in.nextLine(); 
-		
+
 		String[] line = startingLoc.split(" ");
-		
-		
-		
+
+
+
 		String playerColor = in.nextLine();
-		
+
 		Color play_Color = convertColor(playerColor);
-		
+
 		String pType = in.nextLine();
-		
+
 		if(pType.contains("Human")) {
 			HumanPlayer human = new HumanPlayer();
-			
+
 			human.setPlayerName(PlayerName);
 			human.setColor(play_Color);
 			human.setRow(Integer.parseInt(line[0]));
 			human.setColumn(Integer.parseInt(line[1]));
 			human.setType(PlayerType.HUMAN);
-		
+
 			players.add(human);
 		}
-		
+
 		else {
 			ComputerPlayer comp = new ComputerPlayer();
 			comp.setPlayerName(PlayerName);
@@ -216,31 +216,31 @@ public class Board {
 			comp.setRow(Integer.parseInt(line[0]));
 			comp.setColumn(Integer.parseInt(line[1]));
 			comp.setType(PlayerType.COMPUTER);
-			
+
 			players.add(comp); 
-			
+
 		}
-		
+
 		Card card = new Card(PlayerName, CardType.PERSON);
-		
+
 		deck.add(card);
-		
-		
+
+
 	}
-	
-	
+
+
 	/*
 	 * Functions for loading the weapons config files 
 	 */
 	public void loadWeaponConfig() throws FileNotFoundException {
 		FileReader reader = new FileReader("Weapons.txt"); 
 		Scanner in = new Scanner(reader); 
-		
+
 		while(in.hasNextLine()) {
 			String weapon = in.nextLine();
-			
+
 			Card card = new Card(weapon, CardType.WEAPON);
-			
+
 			deck.add(card); 
 		}
 	}
@@ -293,7 +293,7 @@ public class Board {
 
 		findTargets(i, j, numSteps);
 	}
-	
+
 	/*
 	 * Function for finding the targets given the row column and the number of steps 
 	 */
@@ -328,8 +328,8 @@ public class Board {
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
-	
-	
+
+
 	/*
 	 *Calculates the adjacencies of the given cell 
 	 */
@@ -340,7 +340,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	/*
 	 * Adds the adjacencies into the adj matrix 
 	 */
@@ -384,7 +384,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	/*
 	 * Case for doorways
 	 */
@@ -403,7 +403,7 @@ public class Board {
 			nextTo.add(board[row][(col + 1)]);
 		}
 	}
-	
+
 	/*
 	 * Returns the adjacenies list 
 	 */
@@ -413,31 +413,31 @@ public class Board {
 		list = adjMatrix.get(cell);
 		return list;
 	}
-	
+
 	//Function to allow for testing
 	public void setAnswer(Solution solution) {
 		answer.person = solution.person;
 		answer.room = solution.room;
 		answer.weapon = solution.weapon;
 	}
-	
+
 	public void selectAnswer() {
-		
+
 	}
-	
+
 	public Card handleSuggestion(Solution suggestion, Player accusingPlayer) {
 		int numAsked = 0;
-		
+
 		int currentPlayer = players.indexOf(accusingPlayer);
-		 
+
 		while(numAsked < players.size()) {
 			currentPlayer = (currentPlayer + 1) % players.size();
 			Player player = (Player)players.get(currentPlayer);
-			
+
 			if(player != accusingPlayer) {
 				Card card = new Card();
 				card = player.disproveSuggestion(suggestion);
-				
+
 				if(card != null) {
 					for(Player p: players) {
 						p.updateSeenCards(card);
@@ -448,14 +448,14 @@ public class Board {
 			}
 			numAsked++;
 		}
-		
+
 		return null;
 	}
-	
+
 	public void updatePlayers(ArrayList<Player> players) {
 		this.players = players;
 	}
-	
+
 	public boolean checkAccusation(Solution accusation) {
 		int numRight = 0;
 		if(accusation.person.equalsIgnoreCase(answer.person)) {
@@ -470,66 +470,66 @@ public class Board {
 		if(numRight == 3) {
 			return true;
 		}
-		
+
 		return false; 
 	}
 	/*
 	 * Function for dealing the cards to each player
 	 * Random selectiion of cards and goes to each player sequentially. 
 	 */
-	
+
 	public void dealCards() {
 		ArrayList<Card> vist = new ArrayList<Card>();
 		int playerCount = 0;
 		while(vist.size() != 23) {
 			int num = new Random().nextInt(deck.size());
 			Card card = deck.get(num);
-			
+
 			if (vist.contains(card)) {
 				continue;
 			}
-			
+
 			else {
-				
+
 				Player player = players.get(playerCount);
-				
+
 				player.hand.add(card);
-				
+
 				vist.add(card);
-				
+
 				players.set(playerCount, player);
-				
+
 				playerCount++;
-				
+
 				if(playerCount == 6) {
 					playerCount = 0;
 				}
-				
+
 			}
 		}
-		
-		
-		
-		
+
+
+
+
 	}
-	
-	
+
+
 	/*
 	 * Function for converting a string to a color
 	 */
 	public Color convertColor(String strColor) {
 		Color color;
-		
+
 		try {
 			Field field = Class.forName("java.awt.Color").getField(strColor.trim());
 			color = (Color)field.get(null);
-			
+
 		} catch (Exception e) {
 			color = null;
 		}
 		return color;
 	}
-	
+
 	public String getPlayerDisprove() {
 		return playerDisprove;
 	}

@@ -29,7 +29,7 @@ import clueGame.ComputerPlayer;
 
 
 public class gameActionTests {
-	
+
 	public static Board board;
 
 	//Room cards
@@ -52,17 +52,17 @@ public class gameActionTests {
 	public static Card knifeCard = new Card("Knife", CardType.WEAPON);
 	public static Card candleCard = new Card("Candle Stick", CardType.WEAPON);
 	public static Card leadCard = new Card("Lead Pipe", CardType.WEAPON);
-	
-	
+
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		board = Board.getInstance();
 		board.setConfigFiles("ClueMap.csv", "ClueMapLegend.txt");		
 		board.initialize();
-	
-		
+
+
 	}
-	
+
 	/*
 	 * Test to see how computer player will pick a target when no doors are present 
 	 */
@@ -77,7 +77,7 @@ public class gameActionTests {
 		boolean location1 = false;
 		//Row 20 Col 13
 		boolean location2 = false;
-		
+
 		//Test a lot of times
 		for(int i = 0; i < 100; i++) {
 			//Computer player picks a target
@@ -95,7 +95,7 @@ public class gameActionTests {
 		assertTrue(location1);
 		assertTrue(location2);
 	}
-	
+
 	/*
 	 * Test to see how computer player will pick a target door is present
 	 */
@@ -115,7 +115,7 @@ public class gameActionTests {
 			player.setLastVisited(' ');
 		}
 	}
-	
+
 	/*
 	 * Test to see how computer player will pick a target door is present but is also last visited
 	 */
@@ -131,11 +131,11 @@ public class gameActionTests {
 		boolean location2 = false;
 		//Row 16 Col 16
 		boolean location3 = false;
-		
+
 		for(int i = 0; i < 100; i++) {
 			//Computer player selects target each loop
 			BoardCell selectedTarget = player.pickLocation(board.getTargets());
-			
+
 			if(selectedTarget.equals(board.getCellAt(16, 20))) {
 				location1 = true;
 			}
@@ -153,7 +153,7 @@ public class gameActionTests {
 		assertTrue(location2);
 		assertTrue(location3);
 	}
-	
+
 	/*
 	 * Test to see if computer player can make an accusation correctly
 	 */
@@ -164,56 +164,61 @@ public class gameActionTests {
 		board.setAnswer(solution);
 		//Tests correct accusation
 		assertTrue(board.checkAccusation(solution));
-		//Tests false accusations
+		//Tests false accusation with wrong person
 		assertFalse(board.checkAccusation(new Solution("Jim Holden","Gallery","Wrench")));
+		//Tests false accusation with wrong room
 		assertFalse(board.checkAccusation(new Solution("Garrus Vakarian","Stables","Wrench")));
+		//Tests false accusation with wrong weapon
 		assertFalse(board.checkAccusation(new Solution("Garrus Vakarian","Gallery","Revolver")));
 	}
-	
+
 	/*
 	 * Test to see how computer player will create a suggestion and if in the expected manner
 	 */
 	@Test
 	public void testCreateSuggestion() {
 		ComputerPlayer player = new ComputerPlayer("Jim Holden", 0, 0, Color.black);
-		
+
 		//Add all person cards to seen except the anticipated suggested
 		player.updateSeenCards(garrusCard);
 		player.updateSeenCards(jimCard);
 		player.updateSeenCards(amosCard);
 		player.updateSeenCards(malCard);
 		player.updateSeenCards(johnCard);
-		
+
 		//Add all weapon cards to seen except the anticipated suggested
 		player.updateSeenCards(wrenchCard);
 		player.updateSeenCards(ropeCard);
 		player.updateSeenCards(knifeCard);
 		player.updateSeenCards(leadCard);
 		player.updateSeenCards(candleCard);
-		
-		
+
+		//Suggestion created in archery room
 		player.createSuggestion("Archery Room");
-		
+
+		//Test to see if one player that's not seen is selected
 		assertEquals("Tali Zorah", player.getSuggestedPerson());
+		//Room matched current location
 		assertEquals("Archery Room", player.getSuggestedRoom());
+		//Test to see if one weapon that's not seen is selected
 		assertEquals("Revolver", player.getSuggestedWeapon());
-		
+
 	}
-	
+
 	/*
 	 * Test to see how computer player will create a suggestion when it has multiple unseen cards and if in the expected manner
 	 */
 	@Test
 	public void testCreateSuggestionMultiple() {
 		ComputerPlayer player = new ComputerPlayer("Jim Holden", 0, 0, Color.black);
-		
-		
+
+
 		//Add all person cards to seen except 2 anticipated suggestions
 		player.updateSeenCards(garrusCard);
 		player.updateSeenCards(jimCard);
 		player.updateSeenCards(malCard);
 		player.updateSeenCards(johnCard);
-		
+
 		//Add all weapon cards to seen except 2 anticipated suggestions
 		player.updateSeenCards(wrenchCard);
 		player.updateSeenCards(ropeCard);
@@ -224,7 +229,7 @@ public class gameActionTests {
 		boolean guessTali = false;
 		boolean guessKnife = false;
 		boolean guessRevolver = false;
-		
+
 		//Run a lot of times to allow for random picks
 		for(int i = 0; i < 100; i++) {
 			player.createSuggestion("Ballroom");
@@ -243,7 +248,7 @@ public class gameActionTests {
 			//Make sure that guessed room is current room
 			assertEquals("Ballroom",player.getSuggestedRoom());
 		}
-		
+
 		//Make sure that each was picked at least once
 		assertTrue(guessAmos);
 		assertTrue(guessTali);
@@ -251,14 +256,14 @@ public class gameActionTests {
 		assertTrue(guessRevolver);
 
 	}
-	
+
 	/*
 	 * Test to see how computer player will disprove with one card match
 	 */
 	@Test
 	public void testDisproveSuggestionOneMatch() {
 		ComputerPlayer player = new ComputerPlayer("Amos Lee", 1, 1, Color.red);
-		
+
 		Solution suggestion = new Solution("Jim Holden", "Ballroom", "Wrench");
 
 		//Test no match
@@ -271,20 +276,20 @@ public class gameActionTests {
 		player.hand.add(knifeCard);
 		player.hand.add(archeryRoomCard);
 		player.hand.add(jimCard);
-		
+
 		//Test one match
 		assertEquals(jimCard,player.disproveSuggestion(suggestion));
 	}
-	
+
 	/*
 	 * Test to see how computer player will disprove with multiple card match
 	 */
 	@Test
 	public void testDisproveSuggestionsMultMatch() {
 		ComputerPlayer player = new ComputerPlayer("Amos Lee", 1, 1, Color.red);
-		
+
 		Solution suggestion = new Solution("Jim Holden", "Ballroom", "Wrench");
-		
+
 		//Add cards to hand
 		player.hand.add(revolverCard);
 		player.hand.add(amosCard);
@@ -293,16 +298,16 @@ public class gameActionTests {
 		player.hand.add(wrenchCard);
 		player.hand.add(ballroomCard);
 		player.hand.add(jimCard);
-		
+
 		//Cards that should be picked to disprove
 		boolean returnJim = false;
 		boolean returnBallroom = false;
 		boolean returnWrench = false;
-		
+
 		//Run a lot of times to allow for each to be picked
 		for(int i = 0; i < 100; i++) {
 			Card returnFromDisprove = player.disproveSuggestion(suggestion);
-			
+
 			if(returnFromDisprove.getCardName().equals("Jim Holden")) {
 				returnJim = true;
 			}
@@ -313,44 +318,44 @@ public class gameActionTests {
 				returnWrench = true;
 			}
 		}
-		
+
 		assertTrue(returnJim);
 		assertTrue(returnBallroom);
 		assertTrue(returnWrench);
 	}
-	
+
 	/*
 	 * Test to make sure suggestions are handled correctly by the game board
 	 */
 	@Test
 	public void testHandleSuggestion() {
 		ArrayList<Player> players = new ArrayList();
-		
+
 		HumanPlayer humanPlayer = new HumanPlayer("John Galt", 0, 0, Color.blue);
 		ComputerPlayer amos = new ComputerPlayer("Amos Lee", 1, 1, Color.black);
 		ComputerPlayer garrus = new ComputerPlayer("Garrus Vakarian", 2, 2, Color.red);
-		
+
 		players.add(humanPlayer);
 		players.add(amos);
 		players.add(garrus);
-		
+
 		humanPlayer.addCard(wrenchCard);
 		humanPlayer.addCard(archeryRoomCard);
 		humanPlayer.addCard(amosCard);
 		humanPlayer.addCard(candleCard);
-		
+
 		amos.addCard(cloakRoomCard);
 		amos.addCard(jimCard);
 		amos.addCard(leadCard);
 		amos.addCard(stablesCard);
-		
+
 		garrus.addCard(revolverCard);
 		garrus.addCard(kitchenCard);
 		garrus.addCard(malCard);
 		garrus.addCard(ropeCard);
-		
+
 		board.updatePlayers(players);
-		
+
 		Solution suggestion = new Solution("Tali Zorah", "Ballroom","Knife");
 		//Return null if nobody can disprove
 		assertNull(board.handleSuggestion(suggestion,garrus));
@@ -362,36 +367,36 @@ public class gameActionTests {
 		assertNull(board.handleSuggestion(suggestion, humanPlayer));
 		//Suggestion only human can disprove
 		assertEquals(wrenchCard,board.handleSuggestion(suggestion, amos));
-		
+
 		//Both amos and garrus have rope card
 		amos.addCard(ropeCard);
 		//Suggestion now includes rope
 		suggestion.weapon = "Rope";
-		
+
 		//Ensure correct player disproves
 		assertEquals(ropeCard,board.handleSuggestion(suggestion, humanPlayer));
 		assertEquals("Amos Lee", board.getPlayerDisprove());
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
