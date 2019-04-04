@@ -7,8 +7,6 @@ import java.util.Set;
 
 public class ComputerPlayer extends Player {
 	
-	ArrayList<Card> seenCards;
-	
 	private char lastVisitedRoom;
 	
 	private Solution suggestion;
@@ -29,11 +27,29 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public BoardCell pickLocation(Set<BoardCell> targets) {
-		return null; 
+		Random rand = new Random();
+		BoardCell pick = new BoardCell();
+		int counter = 0;
+		int index = rand.nextInt(targets.size());
+		for(BoardCell cell : targets) {
+			//See if room, and if it was last visited, if not set as last visited and pick room
+			if(cell.isDoorway() && (cell.getInitial().charAt(0) != lastVisitedRoom)) {
+				lastVisitedRoom = cell.getInitial().charAt(0);
+				return cell;
+			}
+			
+			if(index == counter) {
+				pick = cell;
+			}
+			counter++;
+
+		}
+		
+		
+		return pick; 
 	}
 	
-	public void makeAccusation() {
-		
+	public void makeAccusation(Solution accusation) {
 	}
 	
 	public void createSuggestion(String room) {
@@ -82,10 +98,6 @@ public class ComputerPlayer extends Player {
 		this.lastVisitedRoom = c;
 	}
 	
-	public void updateSeenCards(Card card) {
-		seenCards.add(card);
-	}
-	
 	public Solution getSuggestion() {
 		
 		return null;
@@ -102,4 +114,5 @@ public class ComputerPlayer extends Player {
 	public String getSuggestedPerson() {
 		return suggestion.person;
 	}
+	
 }

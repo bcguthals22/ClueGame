@@ -44,14 +44,16 @@ public class Board {
 
 	public String roomConfigFile;
 	
-	private static Solution answer;
+	private Solution answer;
+	//Variable used for testing
+	public String playerDisprove;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
 	// constructor is private to ensure only one can be created
 	private Board() {
 		adjMatrix = new HashMap<BoardCell, Set<BoardCell>>();
-
+		answer = new Solution();
 	}
 	// this method returns the only Board
 	public static Board getInstance() {
@@ -423,11 +425,51 @@ public class Board {
 		
 	}
 	
-	public Card handleSuggestion() {
+	public Card handleSuggestion(Solution suggestion, Player accusingPlayer) {
+		int numAsked = 0;
+		
+		int currentPlayer = players.indexOf(accusingPlayer);
+		 
+		while(numAsked < players.size()) {
+			currentPlayer = (currentPlayer + 1) % players.size();
+			Player player = (Player)players.get(currentPlayer);
+			
+			if(player != accusingPlayer) {
+				Card card = player.disproveSuggestion(suggestion);
+				
+				if(card != null) {
+					for(Player p: players) {
+						p.updateSeenCards(card);
+					}
+					playerDisprove = card.getCardName();
+					return card;
+				}
+			}
+			numAsked++;
+		}
+		
 		return null;
 	}
 	
+	public void updatePlayers(ArrayList<Player> players) {
+		this.players = players;
+	}
+	
 	public boolean checkAccusation(Solution accusation) {
+		int numRight = 0;
+		if(accusation.person.equalsIgnoreCase(answer.person)) {
+			numRight++;
+		}
+		if(accusation.room.equalsIgnoreCase(answer.room)) {
+			numRight++;
+		}
+		if(accusation.weapon.equalsIgnoreCase(answer.weapon)) {
+			numRight++;
+		}
+		if(numRight == 3) {
+			return true;
+		}
+		
 		return false; 
 	}
 	/*
@@ -485,6 +527,10 @@ public class Board {
 			color = null;
 		}
 		return color;
+	}
+	
+	public String getPlayerDisprove() {
+		return playerDisprove;
 	}
 
 

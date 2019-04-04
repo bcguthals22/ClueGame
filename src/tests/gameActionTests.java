@@ -9,6 +9,8 @@ import static org.junit.Assert.*;
 
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Set;
 
 import org.junit.*;
 import org.junit.Assert;
@@ -17,6 +19,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.HumanPlayer;
+import clueGame.Player;
 import clueGame.Solution;
 import clueGame.Board;
 import clueGame.BoardCell;
@@ -31,31 +34,32 @@ public class gameActionTests {
 
 	//Room cards
 	public static Card cloakRoomCard = new Card("Cloak Room", CardType.ROOM);
-	Card archeryRoomCard = new Card("Archery Room", CardType.ROOM);
-	Card kitchenCard = new Card("Kitchen", CardType.ROOM);
-	Card stablesCard = new Card("Stables", CardType.ROOM);
-	Card ballroomCard = new Card("Ballroom", CardType.ROOM);
+	public static Card archeryRoomCard = new Card("Archery Room", CardType.ROOM);
+	public static Card kitchenCard = new Card("Kitchen", CardType.ROOM);
+	public static Card stablesCard = new Card("Stables", CardType.ROOM);
+	public static Card ballroomCard = new Card("Ballroom", CardType.ROOM);
 	//People cards
-	Card amosCard = new Card("Amos Lee", CardType.PERSON);
-	Card garrusCard = new Card("Garrus Vakarian", CardType.PERSON);
-	Card jimCard = new Card("Jim Holden", CardType.PERSON);
-	Card taliCard = new Card("Tali Zorah", CardType.PERSON);
-	Card malCard = new Card("Mal Reynolds", CardType.PERSON);
-	Card johnCard = new Card("John Galt", CardType.PERSON);
+	public static Card amosCard = new Card("Amos Lee", CardType.PERSON);
+	public static Card garrusCard = new Card("Garrus Vakarian", CardType.PERSON);
+	public static Card jimCard = new Card("Jim Holden", CardType.PERSON);
+	public static Card taliCard = new Card("Tali Zorah", CardType.PERSON);
+	public static Card malCard = new Card("Mal Reynolds", CardType.PERSON);
+	public static Card johnCard = new Card("John Galt", CardType.PERSON);
 	//Weapon cards
-	Card revolverCard = new Card("Revolver", CardType.WEAPON);
-	Card wrenchCard = new Card("Wrench", CardType.WEAPON);
-	Card ropeCard = new Card("Rope", CardType.WEAPON);
-	Card knifeCard = new Card("Knife", CardType.WEAPON);
-	Card candleCard = new Card("Candle Stick", CardType.WEAPON);
-	Card leadCard = new Card("Lead Pipe", CardType.WEAPON);
+	public static Card revolverCard = new Card("Revolver", CardType.WEAPON);
+	public static Card wrenchCard = new Card("Wrench", CardType.WEAPON);
+	public static Card ropeCard = new Card("Rope", CardType.WEAPON);
+	public static Card knifeCard = new Card("Knife", CardType.WEAPON);
+	public static Card candleCard = new Card("Candle Stick", CardType.WEAPON);
+	public static Card leadCard = new Card("Lead Pipe", CardType.WEAPON);
+	
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		board = board.getInstance();
+		board = Board.getInstance();
 		board.setConfigFiles("ClueMap.csv", "ClueMapLegend.txt");		
 		board.initialize();
-		
+	
 		
 	}
 	
@@ -63,27 +67,23 @@ public class gameActionTests {
 	public void testTargetRandom() {
 		ComputerPlayer player = new ComputerPlayer();
 		//Test location with no rooms
-		board.calcTargets(16, 17, 2);
+		board.calcTargets(20,12, 1);
+		Set<BoardCell> calcTargets = board.getTargets();
 		//Three locations that should be picked
-		//Row 16 Col 19
+		//Row 19 Col 12
 		boolean location1 = false;
-		//Row 16 Col 15
+		//Row 20 Col 13
 		boolean location2 = false;
-		//Row 15 Col 16
-		boolean location3 = false;
 		
 		//Test a lot of times
 		for(int i = 0; i < 100; i++) {
 			//Computer player picks a target
 			BoardCell selectedTarget = player.pickLocation(board.getTargets());
-			if(selectedTarget.equals(board.getCellAt(16, 19))) {
+			if(selectedTarget.equals(board.getCellAt(19,12))) {
 				location1 = true;
 			}
-			else if(selectedTarget.equals(board.getCellAt(16, 16))) {
+			else if(selectedTarget.equals(board.getCellAt(20, 13))) {
 				location2 = true;
-			}
-			else if(selectedTarget.equals(board.getCellAt(15,16))) {
-				location3 = true;
 			}
 			else {
 				fail("Target not valid");
@@ -91,7 +91,6 @@ public class gameActionTests {
 		}
 		assertTrue(location1);
 		assertTrue(location2);
-		assertTrue(location3);
 	}
 	
 	@Test
@@ -99,6 +98,7 @@ public class gameActionTests {
 		ComputerPlayer player = new ComputerPlayer();
 		//Test location next to room
 		board.calcTargets(1, 15, 2);
+		Set<BoardCell> calcTargets = board.getTargets();
 		//Desired location that doesn't change
 		BoardCell desiredLocation = board.getCellAt(0, 16);
 		for(int i = 0; i < 100; i++) {
@@ -148,13 +148,14 @@ public class gameActionTests {
 	@Test
 	public void testMakeAccustation() {
 		//Set sample solution
-		board.setAnswer(new Solution("Garrus Vakarian","Gallery","Wrench"));
+		Solution solution = new Solution("Garrus Vakarian", "Gallery", "Wrench");
+		board.setAnswer(solution);
 		//Tests correct accusation
-		assertTrue(board.checkAccusation(new Solution("Garrus Vakarian","Gallery","Wrench")));
+		assertTrue(board.checkAccusation(solution));
 		//Tests false accusations
-		assertTrue(board.checkAccusation(new Solution("Jim Holden","Gallery","Wrench")));
-		assertTrue(board.checkAccusation(new Solution("Garrus Vakarian","Stables","Wrench")));
-		assertTrue(board.checkAccusation(new Solution("Garrus Vakarian","Gallery","Revolver")));
+		assertFalse(board.checkAccusation(new Solution("Jim Holden","Gallery","Wrench")));
+		assertFalse(board.checkAccusation(new Solution("Garrus Vakarian","Stables","Wrench")));
+		assertFalse(board.checkAccusation(new Solution("Garrus Vakarian","Gallery","Revolver")));
 	}
 	
 	@Test
@@ -276,13 +277,13 @@ public class gameActionTests {
 		for(int i = 0; i < 100; i++) {
 			Card returnFromDisprove = player.disproveSuggestion(suggestion);
 			
-			if(returnFromDisprove.equals("Jim Holden")) {
+			if(returnFromDisprove.getCardName().equals("Jim Holden")) {
 				returnJim = true;
 			}
-			else if(returnFromDisprove.equals("Ballroom")) {
+			else if(returnFromDisprove.getCardName().equals("Ballroom")) {
 				returnBallroom = true;
 			}
-			else if(returnFromDisprove.equals("Wrench")) {
+			else if(returnFromDisprove.getCardName().equals("Wrench")) {
 				returnWrench = true;
 			}
 		}
@@ -294,6 +295,74 @@ public class gameActionTests {
 	
 	@Test
 	public void testHandleSuggestion() {
+		ArrayList<Player> players = new ArrayList();
+		
+		HumanPlayer humanPlayer = new HumanPlayer("John Galt", 0, 0, Color.blue);
+		ComputerPlayer amos = new ComputerPlayer("Amos Lee", 1, 1, Color.black);
+		ComputerPlayer garrus = new ComputerPlayer("Garrus Vakarian", 2, 2, Color.red);
+		
+		players.add(humanPlayer);
+		players.add(amos);
+		players.add(garrus);
+		
+		humanPlayer.addCard(wrenchCard);
+		humanPlayer.addCard(archeryRoomCard);
+		humanPlayer.addCard(amosCard);
+		humanPlayer.addCard(candleCard);
+		
+		amos.addCard(cloakRoomCard);
+		amos.addCard(jimCard);
+		amos.addCard(leadCard);
+		amos.addCard(stablesCard);
+		
+		garrus.addCard(revolverCard);
+		garrus.addCard(kitchenCard);
+		garrus.addCard(malCard);
+		garrus.addCard(ropeCard);
+		
+		board.updatePlayers(players);
+		
+		Solution suggestion = new Solution("Tali Zorah", "Ballroom","Knife");
+		//Return null if nobody can disprove
+		assertNull(board.handleSuggestion(suggestion,garrus));
+		suggestion.weapon = "Rope";
+		//Return null if only accusing player can disprove
+		assertNull(board.handleSuggestion(suggestion, garrus));
+		suggestion.weapon = "Wrench";
+		//Return null if human player can disprove but is also the accuser
+		assertNull(board.handleSuggestion(suggestion, humanPlayer));
+		//Suggestion only human can disprove
+		assertEquals(wrenchCard,board.handleSuggestion(suggestion, amos));
+		
+		//Both amos and garrus have rope card
+		amos.addCard(ropeCard);
+		//Suggestion now includes rope
+		suggestion.weapon = "Rope";
+		
+		//Ensure correct player disproves
+		assertEquals(ropeCard,board.handleSuggestion(suggestion, humanPlayer));
+		assertEquals("Amos Lee", board.getPlayerDisprove());
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

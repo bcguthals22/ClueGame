@@ -19,6 +19,10 @@ public class BoardCell {
 		this.type = room;
 	}
 	
+	public BoardCell() {
+		
+	}
+	
 	/*
 	 * Function to determine if a specific cell is a door.
 	 * Returns true if the length is 2 and the second character is not 'N'
