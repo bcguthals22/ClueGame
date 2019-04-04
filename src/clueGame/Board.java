@@ -442,7 +442,7 @@ public class Board {
 					for(Player p: players) {
 						p.updateSeenCards(card);
 					}
-					playerDisprove = card.getCardName();
+					playerDisprove = player.getPlayerName();
 					return card;
 				}
 			}
