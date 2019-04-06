@@ -24,11 +24,13 @@ public class ControlGUI extends JFrame {
 		
 
 		setSize(new Dimension(900, 500));
-
+		
+		//Terminates program on close
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setTitle("Control GUI");
 		
+		//Reducing vertical spaceing 
 		setLayout(new GridLayout(2,0, 30, 0));
 		
 		JPanel panel = new JPanel();
@@ -37,6 +39,10 @@ public class ControlGUI extends JFrame {
 		
 		JPanel bottomPanel = new JPanel();
 		
+		/*
+		 * Adding each induviual panel to either the top or bottom panel
+		 * Then adding them to the frame 
+		 */
 		
 		panel = whoseTurnBox();
 		topPanel.add(panel);
@@ -52,6 +58,7 @@ public class ControlGUI extends JFrame {
 		add(topPanel);
 		add(bottomPanel); 
 		
+		//Condensing frame
 		pack();
 
 		
@@ -60,7 +67,9 @@ public class ControlGUI extends JFrame {
 		
 		
 	}
-	
+	/*
+	 * Adding the buttons for the next player and make accusation
+	 */
 	public JPanel addControlButtons() {
 		
 		JPanel panel = new JPanel();
@@ -68,7 +77,7 @@ public class ControlGUI extends JFrame {
 		JButton nextPlayer = new JButton("Next Player");
 		JButton makeAccu = new JButton("Make Accusation");
 		
-		
+		//Setting their sizes 
 		nextPlayer.setPreferredSize(new Dimension(250, 100));
 		makeAccu.setPreferredSize(new Dimension(250, 100));
 		panel.add(nextPlayer);
@@ -77,7 +86,9 @@ public class ControlGUI extends JFrame {
 		return panel;
 	}
 	
-	
+	/*
+	 * Adding whose turn box. Lets player know whose turn it is 
+	 */
 	public JPanel whoseTurnBox() {
 		
 		JPanel panel = new JPanel();
@@ -99,7 +110,9 @@ public class ControlGUI extends JFrame {
 		return panel; 
 		
 	}
-	
+	/*\
+	 * Added die roll box has a text feild to display dice roll and a etched border
+	 */
 	public JPanel dieRollBox() {
 		JPanel panel = new JPanel();
 
@@ -119,7 +132,9 @@ public class ControlGUI extends JFrame {
 		return panel; 
 	}
 	
-	
+	/*
+	 * Guess box with text field fro displaying the guess and etched border
+	 */
 	public JPanel guessBox() {
 		JPanel panel = new JPanel();
 		
@@ -141,7 +156,9 @@ public class ControlGUI extends JFrame {
 		return panel;
 		
 	}
-	
+	/*
+	 * Guess result box with a uneditable text field that will tell the player the result of the guess. 
+	 */
 	public JPanel guessResBox() {
 		JPanel panel = new JPanel();
 		
