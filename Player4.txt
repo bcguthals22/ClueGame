@@ -1,4 +1,4 @@
 Jim Holden
-5 11
-yellow
+5 0
+cyan
 Computer

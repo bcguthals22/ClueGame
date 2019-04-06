@@ -20,6 +20,8 @@ public class BoardCell {
 	private int y;
 	
 	public static int BOARD_CELL_SIZE = 30;
+	
+	public static int DOOR_SIZE = 5;
 
 	public BoardCell(int row, int column, String room) {
 		super();
@@ -83,31 +85,47 @@ public class BoardCell {
 				return DoorDirection.NONE;
 			}
 		}
-		
+
 		return DoorDirection.NONE;
 	}
 
 	public String getInitial() {
 		return type.substring(0,1); 
 	}
-	
+
 	public void draw(Graphics2D g) {
-		
-		 if(isWalkway()) {
+
+		if(isWalkway()) {
 			g.setColor(Color.YELLOW);
 			g.fillRect(this.x, this.y, BOARD_CELL_SIZE, BOARD_CELL_SIZE);
 			g.setColor(Color.BLACK);
 			g.drawRect(this.x, this.y, BOARD_CELL_SIZE, BOARD_CELL_SIZE);
 		}
-		
-		
+
+
 		else {
 			g.setColor(Color.LIGHT_GRAY);
 			g.fillRect(this.x, this.y, BOARD_CELL_SIZE, BOARD_CELL_SIZE);
-			
+
 		}
-		
-		
+
+		if(isDoorway()) {
+			g.setColor(Color.BLUE);
+			if(getDoorDirection() == DoorDirection.RIGHT) {
+				g.fillRect(this.x + 25, this.y, DOOR_SIZE, BOARD_CELL_SIZE);
+			}
+			if(getDoorDirection() == DoorDirection.LEFT) {
+				g.fillRect(this.x, this.y, DOOR_SIZE, BOARD_CELL_SIZE);
+			}
+			if(getDoorDirection() == DoorDirection.UP) {
+				g.fillRect(this.x, this.y, BOARD_CELL_SIZE, DOOR_SIZE);
+			}
+			if(getDoorDirection() == DoorDirection.DOWN) {
+				g.fillRect(this.x, this.y + 25, BOARD_CELL_SIZE, DOOR_SIZE);
+			}
+		}
+
+
 	}
 
 

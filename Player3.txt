@@ -1,4 +1,4 @@
 Garrus Vakarian
-10 15
+5 21 
 blue
 Computer

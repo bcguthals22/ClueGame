@@ -1,4 +1,4 @@
 Tali Zorah
-9 9 
-purple
+20 9 
+magenta
 Computer

@@ -124,6 +124,8 @@ public class Player {
 		
 		g.setColor(this.color);
 		g.fillOval(x, y, size, size);
+		g.setColor(Color.BLACK);
+		g.drawOval(x, y, size, size);
 		
 	}
 
