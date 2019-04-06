@@ -23,20 +23,37 @@ public class ControlGUI extends JFrame {
 	public ControlGUI() {
 		
 
-		setSize(new Dimension(700, 500));
+		setSize(new Dimension(900, 500));
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setTitle("Control GUI");
 		
+		setLayout(new GridLayout(2,0, 30, 0));
+		
 		JPanel panel = new JPanel();
 		
-		panel = addControlButtons();
-		add(panel);
+		JPanel topPanel = new JPanel();
+		
+		JPanel bottomPanel = new JPanel();
+		
+		
 		panel = whoseTurnBox();
-		add(panel, BorderLayout.WEST);
+		topPanel.add(panel);
+		panel = addControlButtons();
+		topPanel.add(panel);
 		panel = dieRollBox();
-		add(panel, BorderLayout.SOUTH);
+		bottomPanel.add(panel);
+		panel = guessBox();
+		bottomPanel.add(panel); 
+		panel = guessResBox();
+		bottomPanel.add(panel); 
+		
+		add(topPanel);
+		add(bottomPanel); 
+		
+		pack();
+
 		
 
 		
@@ -52,8 +69,8 @@ public class ControlGUI extends JFrame {
 		JButton makeAccu = new JButton("Make Accusation");
 		
 		
-		nextPlayer.setPreferredSize(new Dimension(150, 100));
-		makeAccu.setPreferredSize(new Dimension(150, 100));
+		nextPlayer.setPreferredSize(new Dimension(250, 100));
+		makeAccu.setPreferredSize(new Dimension(250, 100));
 		panel.add(nextPlayer);
 		panel.add(makeAccu);
 		
@@ -94,8 +111,52 @@ public class ControlGUI extends JFrame {
 		rollNum.setEditable(false);
 
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Die"));
-
+		
+		panel.add(label);
+		
 		panel.add(rollNum);
+		
+		return panel; 
+	}
+	
+	
+	public JPanel guessBox() {
+		JPanel panel = new JPanel();
+		
+		JTextField personGuess;
+		
+		JLabel label = new JLabel("Guess");
+		
+		personGuess = new JTextField(20);
+		
+		personGuess.setEditable(false);
+		
+		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
+		
+		panel.add(label);
+		
+		panel.add(personGuess);
+		
+		
+		return panel;
+		
+	}
+	
+	public JPanel guessResBox() {
+		JPanel panel = new JPanel();
+		
+		JTextField response;
+		
+		JLabel label = new JLabel("Response");
+		
+		response = new JTextField(10);
+		
+		response.setEditable(false);
+		
+		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
+		
+		panel.add(label);
+		panel.add(response);
 		
 		return panel; 
 	}
