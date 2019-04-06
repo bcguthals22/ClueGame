@@ -6,6 +6,8 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.io.FileNotFoundException;
 
 import java.io.FileReader;
@@ -17,11 +19,13 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JPanel;
+
 import java.util.*;
 
 
 
-public class Board {
+public class Board extends JPanel{
 	private static final int MAX_BOARD_SIZE = 100; 
 	private int numRows;
 	private int numColumns; 
@@ -534,6 +538,29 @@ public class Board {
 		return playerDisprove;
 	}
 
-
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		Graphics2D g2 = (Graphics2D)g; 
+		
+		drawBoardCells(g2); 
+		drawPlayers(g2);
+	}
+	private void drawBoardCells(Graphics2D g) {
+		for(int i = 0; i < numRows; i++) {
+			for(int j = 0; j < numColumns; j++) {
+				board[i][j].draw(g);
+			}
+		}
+		
+	}
+	public void drawPlayers(Graphics2D g) {
+		for(Player p: this.players) {
+			p.drawPlayer(g, this); 
+		}
+		
+	}
+	
+	
 }
 

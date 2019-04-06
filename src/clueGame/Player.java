@@ -7,6 +7,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -113,6 +114,17 @@ public class Player {
 
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	public void drawPlayer(Graphics2D g, Board board) {
+		int size = BoardCell.BOARD_CELL_SIZE;
+		
+		int x = this.column * size;
+		int y = this.row * size;
+		
+		g.setColor(this.color);
+		g.fillOval(x, y, size, size);
+		
 	}
 
 

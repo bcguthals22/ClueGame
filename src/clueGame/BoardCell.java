@@ -5,18 +5,30 @@
  */
 package clueGame;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+
 public class BoardCell {
 	public int row;
 
 	public int column;
 	
 	public String type;
+	
+	private int x;
+	
+	private int y;
+	
+	public static int BOARD_CELL_SIZE = 30;
 
 	public BoardCell(int row, int column, String room) {
 		super();
 		this.row = row;
 		this.column = column;
 		this.type = room;
+		
+		this.y = row * 30;
+		this.x = column * 30;
 	}
 	
 	public BoardCell() {
@@ -77,6 +89,25 @@ public class BoardCell {
 
 	public String getInitial() {
 		return type.substring(0,1); 
+	}
+	
+	public void draw(Graphics2D g) {
+		
+		 if(isWalkway()) {
+			g.setColor(Color.YELLOW);
+			g.fillRect(this.x, this.y, BOARD_CELL_SIZE, BOARD_CELL_SIZE);
+			g.setColor(Color.BLACK);
+			g.drawRect(this.x, this.y, BOARD_CELL_SIZE, BOARD_CELL_SIZE);
+		}
+		
+		
+		else {
+			g.setColor(Color.LIGHT_GRAY);
+			g.fillRect(this.x, this.y, BOARD_CELL_SIZE, BOARD_CELL_SIZE);
+			
+		}
+		
+		
 	}
 
 
