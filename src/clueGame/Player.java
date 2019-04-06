@@ -115,7 +115,10 @@ public class Player {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-
+	/*
+	 * Draw function for player that draws it at set location and sets its color
+	 * and draws an outline
+	 */
 	public void drawPlayer(Graphics2D g, Board board) {
 		int size = BoardCell.BOARD_CELL_SIZE;
 		

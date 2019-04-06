@@ -93,7 +93,10 @@ public class BoardCell {
 	public String getInitial() {
 		return type.substring(0,1); 
 	}
-
+	
+	/*
+	 * Draws the boardcells one by one, coloring yellow if walkway and grey if not 
+	 */
 	public void draw(Graphics2D g) {
 
 		if(isWalkway()) {
@@ -109,7 +112,9 @@ public class BoardCell {
 			g.fillRect(this.x, this.y, BOARD_CELL_SIZE, BOARD_CELL_SIZE);
 
 		}
-
+		/*
+		 * If its a door, add a smaller rectangle orientaed apropriatly 
+		 */
 		if(isDoorway()) {
 			g.setColor(Color.BLUE);
 			if(getDoorDirection() == DoorDirection.RIGHT) {
@@ -126,6 +131,9 @@ public class BoardCell {
 			}
 		}
 		
+		/*
+		 * Adds Labled to map
+		 */
 		Font f = new Font("TimesRoman", Font.BOLD, 13);
 		
 		g.setFont(f);

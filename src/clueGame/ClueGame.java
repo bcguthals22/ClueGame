@@ -22,7 +22,10 @@ public class ClueGame extends JFrame{
 		
 		
 	}
-
+	
+	/*
+	 * Sets up the board and calls the gui function
+	 */
 	private void setup() {
 		board = Board.getInstance();
 		board.setConfigFiles("ClueMap.csv", "ClueMapLegend.txt");		
@@ -31,7 +34,9 @@ public class ClueGame extends JFrame{
 		GUI();
 		
 	}
-
+	/*
+	 * sets close operation, size and calls the boards draw function 
+	 */
 	private void GUI() {
 		setTitle("Clue Game!");
 		
@@ -44,7 +49,9 @@ public class ClueGame extends JFrame{
 		makeMenu();
 		
 	}
-	
+	/*
+	 * Makes the menu bar unpoulated
+	 */
 	private void makeMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -52,14 +59,18 @@ public class ClueGame extends JFrame{
 		menuBar.add(createFileMenu());
 		
 	}
-
+	/*
+	 * Adds file option to menu
+	 */
 	private JMenu createFileMenu() {
 		JMenu menu = new JMenu("File");
 		menu.add(makeDectNotes());
 		menu.add(makeFileExit());
 		return menu;
 	}
-
+	/*
+	 * Adds detective notes to menu
+	 */
 	private JMenuItem makeDectNotes() {
 		JMenuItem dect = new JMenuItem("Show Detective Notes");
 
@@ -70,21 +81,24 @@ public class ClueGame extends JFrame{
 		});
 		return dect;
 	}
+	/*
+	 * Adds exit to file menu
+	 */
 
-		private JMenuItem makeFileExit() {
-			JMenuItem exit = new JMenuItem("Exit");
+	private JMenuItem makeFileExit() {
+		JMenuItem exit = new JMenuItem("Exit");
 
-			exit.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					System.exit(0);
-				}
-			});
-			return exit;
-		}
-
-		public static void main(String[] args) {
-			ClueGame clueGame = new ClueGame();
-
-			clueGame.setVisible(true);
-		}
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		return exit;
 	}
+
+	public static void main(String[] args) {
+		ClueGame clueGame = new ClueGame();
+
+		clueGame.setVisible(true);
+	}
+}

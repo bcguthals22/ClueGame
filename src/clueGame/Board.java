@@ -553,7 +553,11 @@ public class Board extends JPanel{
 	public String getPlayerDisprove() {
 		return playerDisprove;
 	}
-
+	
+	/*
+	 * Paint function that calls draw on the boardcells and the players
+	 */
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
@@ -562,6 +566,9 @@ public class Board extends JPanel{
 		drawBoardCells(g2); 
 		drawPlayers(g2);
 	}
+	/*
+	 * For each item in board call the draw function of board cell
+	 */
 	private void drawBoardCells(Graphics2D g) {
 		for(int i = 0; i < numRows; i++) {
 			for(int j = 0; j < numColumns; j++) {
@@ -570,6 +577,9 @@ public class Board extends JPanel{
 		}
 		
 	}
+	/*
+	 * For each player, call the draw function of player
+	 */
 	public void drawPlayers(Graphics2D g) {
 		for(Player p: this.players) {
 			p.drawPlayer(g, this); 
