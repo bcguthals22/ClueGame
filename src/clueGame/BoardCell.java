@@ -6,6 +6,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 public class BoardCell {
@@ -124,9 +125,39 @@ public class BoardCell {
 				g.fillRect(this.x, this.y + 25, BOARD_CELL_SIZE, DOOR_SIZE);
 			}
 		}
+		
+		Font f = new Font("TimesRoman", Font.BOLD, 13);
+		
+		g.setFont(f);
+		
+		g.setColor(Color.BLACK);
+		
+		drawRoomName("Cloak Room", 0, 60, g);
+		drawRoomName("Drawing Room", 200, 80, g);
+		drawRoomName("Kitchen", 380, 80, g);
+		drawRoomName("Ballroom", 550, 80, g);
+		drawRoomName("Gallery", 20, 240, g);
+		drawRoomName("Wine Cellar", 220, 240, g);
+		drawRoomName("Parking Garage", 550, 380, g);
+		drawRoomName("Archery Range", 0, 420, g);
+		drawRoomName("Stables", 200, 500, g);
+		drawRoomName("Billiard Room", 300, 500, g);
+		drawRoomName("Swimming Pool", 500, 550, g);
 
+
+
+
+
+	
 
 	}
+	
+	public void drawRoomName(String name, int x, int y, Graphics2D g) {
+		g.drawString(name, x, y);
+	}
+	
+	
+
 
 
 
