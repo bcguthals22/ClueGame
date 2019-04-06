@@ -15,6 +15,8 @@ import javax.swing.JMenuItem;
 public class ClueGame extends JFrame{
 	private Board board;
 	
+	private DetectiveNotes detNotes = new DetectiveNotes();
+	
 	public ClueGame() {
 		setup();
 		
@@ -53,30 +55,36 @@ public class ClueGame extends JFrame{
 
 	private JMenu createFileMenu() {
 		JMenu menu = new JMenu("File");
-		//menu.add(makeDectNotes());
+		menu.add(makeDectNotes());
 		menu.add(makeFileExit());
 		return menu;
 	}
 
 	private JMenuItem makeDectNotes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		JMenuItem dect = new JMenuItem("Show Detective Notes");
 
-	private JMenuItem makeFileExit() {
-		JMenuItem exit = new JMenuItem("Exit");
-		
-		exit.addActionListener(new ActionListener() {
+		dect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				ClueGame.this.detNotes.setVisible(true);
 			}
 		});
-		return exit;
+		return dect;
 	}
 
-	public static void main(String[] args) {
-		ClueGame clueGame = new ClueGame();
-		
-		clueGame.setVisible(true);
+		private JMenuItem makeFileExit() {
+			JMenuItem exit = new JMenuItem("Exit");
+
+			exit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					System.exit(0);
+				}
+			});
+			return exit;
+		}
+
+		public static void main(String[] args) {
+			ClueGame clueGame = new ClueGame();
+
+			clueGame.setVisible(true);
+		}
 	}
-}

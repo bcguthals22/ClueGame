@@ -43,6 +43,12 @@ public class Board extends JPanel{
 	public ArrayList<Card> deck = new ArrayList<Card>();
 
 	public ArrayList<Player> players = new ArrayList<Player>();
+	
+	public ArrayList<String> playerNames = new ArrayList<String>();
+	
+	public ArrayList<String> roomNames = new ArrayList<String>();
+	
+	public ArrayList<String> weapNames = new ArrayList<String>();
 
 	public String boardConfigFile;
 
@@ -112,6 +118,11 @@ public class Board extends JPanel{
 		while(in.hasNextLine()) {
 			String character = in.next();
 			String roomName = in.next();
+			
+			if(!roomName.contains("Closet") && !roomName.contains("Walk")) {
+				roomNames.add(roomName);
+			}
+			
 			String card = in.next();
 			card = card.substring(1); 
 
@@ -162,6 +173,7 @@ public class Board extends JPanel{
 				Character c = cha.charAt(0);
 
 				String room = legend.get(c);
+	
 
 				if(room == null) {
 					throw new BadConfigFormatException("Room type not defined " + cha);
@@ -188,6 +200,8 @@ public class Board extends JPanel{
 		String PlayerName;
 
 		PlayerName = in.nextLine();
+		
+		playerNames.add(PlayerName); 
 
 		String startingLoc = in.nextLine(); 
 
@@ -242,6 +256,8 @@ public class Board extends JPanel{
 
 		while(in.hasNextLine()) {
 			String weapon = in.nextLine();
+			
+			weapNames.add(weapon);
 
 			Card card = new Card(weapon, CardType.WEAPON);
 

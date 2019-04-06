@@ -144,12 +144,6 @@ public class BoardCell {
 		drawRoomName("Billiard Room", 300, 500, g);
 		drawRoomName("Swimming Pool", 500, 550, g);
 
-
-
-
-
-	
-
 	}
 	
 	public void drawRoomName(String name, int x, int y, Graphics2D g) {
