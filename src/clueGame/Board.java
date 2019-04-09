@@ -44,6 +44,8 @@ public class Board extends JPanel{
 
 	public ArrayList<Player> players = new ArrayList<Player>();
 	
+	public ArrayList<String> playerColors = new ArrayList<String>();
+	
 	public ArrayList<String> playerNames = new ArrayList<String>();
 	
 	public ArrayList<String> roomNames = new ArrayList<String>();
@@ -211,6 +213,8 @@ public class Board extends JPanel{
 
 		String playerColor = in.nextLine();
 
+		playerColors.add(playerColor);
+		
 		Color play_Color = convertColor(playerColor);
 
 		String pType = in.nextLine();

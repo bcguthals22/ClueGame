@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class ClueGame extends JFrame{
 	private Board board;
@@ -46,11 +48,12 @@ public class ClueGame extends JFrame{
 		
 		add(this.board);
 		
+		JOptionPane.showMessageDialog(null, "You are " + board.playerNames.get(0) + " and your color is " + board.playerColors.get(0) + " , press Next Player to play", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
 		makeMenu();
 		
 	}
 	/*
-	 * Makes the menu bar unpoulated
+	 * Makes the menu bar unpopulated
 	 */
 	private void makeMenu() {
 		JMenuBar menuBar = new JMenuBar();
