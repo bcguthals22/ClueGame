@@ -18,7 +18,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class ControlGUI extends JFrame {
+public class ControlGUI extends JPanel {
 
 	public ControlGUI() {
 		
@@ -26,10 +26,6 @@ public class ControlGUI extends JFrame {
 		setSize(new Dimension(900, 500));
 		
 		//Terminates program on close
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		setTitle("Control GUI");
-		
 		//Reducing vertical spaceing 
 		setLayout(new GridLayout(2,0, 30, 0));
 		
@@ -55,17 +51,14 @@ public class ControlGUI extends JFrame {
 		panel = guessResBox();
 		bottomPanel.add(panel); 
 		
-		add(topPanel);
-		add(bottomPanel); 
 		
-		//Condensing frame
-		pack();
-
+		JPanel totalPanel = new JPanel();
 		
-
+		totalPanel.setLayout(new GridLayout(2,0,40,0));
 		
-		
-		
+		totalPanel.add(topPanel);
+		totalPanel.add(bottomPanel);
+		add(totalPanel);
 	}
 	/*
 	 * Adding the buttons for the next player and make accusation
