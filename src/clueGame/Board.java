@@ -104,6 +104,12 @@ public class Board extends JPanel{
 			e.getMessage();		}
 
 		calcAdjacencies(); 
+		
+		
+		dealCards();
+		
+		
+		
 	}
 
 	/*

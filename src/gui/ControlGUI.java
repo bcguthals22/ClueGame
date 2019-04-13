@@ -23,7 +23,7 @@ public class ControlGUI extends JPanel {
 	public ControlGUI() {
 		
 
-		setSize(new Dimension(900, 500));
+		
 		
 		//Terminates program on close
 		//Reducing vertical spaceing 
@@ -71,8 +71,8 @@ public class ControlGUI extends JPanel {
 		JButton makeAccu = new JButton("Make Accusation");
 		
 		//Setting their sizes 
-		nextPlayer.setPreferredSize(new Dimension(250, 100));
-		makeAccu.setPreferredSize(new Dimension(250, 100));
+		nextPlayer.setPreferredSize(new Dimension(200, 100));
+		makeAccu.setPreferredSize(new Dimension(200, 100));
 		panel.add(nextPlayer);
 		panel.add(makeAccu);
 		

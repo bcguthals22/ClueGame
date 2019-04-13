@@ -4,6 +4,9 @@
 
 package clueGame;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,8 +17,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import gui.ControlGUI;
+import gui.PlayerGUI;
+
 public class ClueGame extends JFrame{
 	private Board board;
+	
+	private ControlGUI control;
+	
+	private PlayerGUI playerGUI;
 	
 	private DetectiveNotes detNotes = new DetectiveNotes();
 	
@@ -31,7 +41,7 @@ public class ClueGame extends JFrame{
 	private void setup() {
 		board = Board.getInstance();
 		board.setConfigFiles("ClueMap.csv", "ClueMapLegend.txt");		
-		board.initialize();
+		//board.initialize();
 		
 		GUI();
 		
@@ -44,14 +54,29 @@ public class ClueGame extends JFrame{
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setSize(1000,1000);
+		add(this.board, BorderLayout.CENTER);
 		
-		add(this.board);
+		setSize(820, 880);
 		
-		JOptionPane.showMessageDialog(null, "You are " + board.playerNames.get(0) + " and your color is " + board.playerColors.get(0) + " , press Next Player to play", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
+		playerGUI = new PlayerGUI(this.board);
+		
+		add(playerGUI, BorderLayout.EAST);
+		
 		makeMenu();
 		
+		
+		makeSplash();
+		
+		
+		
 	}
+	
+	
+	private void makeSplash() {
+		JOptionPane.showMessageDialog(null, "You are " + board.playerNames.get(0) + " and your color is " + board.playerColors.get(0) + " , press Next Player to play", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
+
+	}
+	
 	/*
 	 * Makes the menu bar unpopulated
 	 */
