@@ -62,6 +62,11 @@ public class ClueGame extends JFrame{
 		
 		add(playerGUI, BorderLayout.EAST);
 		
+		
+		control = new ControlGUI();
+		
+		add(control, BorderLayout.SOUTH);
+		
 		makeMenu();
 		
 		

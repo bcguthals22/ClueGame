@@ -1,185 +1,183 @@
-/*
- * Authors: Nicholas Wenzel and Brennen Guthals
+/*Authors Nicholas Wenzel and Brennen Guthals
+ * 
  */
+
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+
 public class ControlGUI extends JPanel {
-
+	
 	public ControlGUI() {
+		setLayout(new GridLayout(2,0)); 
 		
-
+		add(makeButtons());
 		
-		
-		//Terminates program on close
-		//Reducing vertical spaceing 
-		setLayout(new GridLayout(2,0, 30, 0));
-		
-		JPanel panel = new JPanel();
-		
-		JPanel topPanel = new JPanel();
-		
-		JPanel bottomPanel = new JPanel();
-		
-		/*
-		 * Adding each induviual panel to either the top or bottom panel
-		 * Then adding them to the frame 
-		 */
-		
-		panel = whoseTurnBox();
-		topPanel.add(panel);
-		panel = addControlButtons();
-		topPanel.add(panel);
-		panel = dieRollBox();
-		bottomPanel.add(panel);
-		panel = guessBox();
-		bottomPanel.add(panel); 
-		panel = guessResBox();
-		bottomPanel.add(panel); 
-		
-		
-		JPanel totalPanel = new JPanel();
-		
-		totalPanel.setLayout(new GridLayout(2,0,40,0));
-		
-		totalPanel.add(topPanel);
-		totalPanel.add(bottomPanel);
-		add(totalPanel);
+		add(makeInfoBoxes());
 	}
+	
 	/*
-	 * Adding the buttons for the next player and make accusation
+	 * Functions for making the buttons on the control panel. It also add the label and text feild that goes to the 
+	 * right of the buttons
 	 */
-	public JPanel addControlButtons() {
-		
+	private JPanel makeButtons() {
 		JPanel panel = new JPanel();
 		
-		JButton nextPlayer = new JButton("Next Player");
-		JButton makeAccu = new JButton("Make Accusation");
+		//Setting the panels layout to have 1 row and a adjustable number of cols
+		panel.setLayout(new GridLayout(1,0));
 		
-		//Setting their sizes 
-		nextPlayer.setPreferredSize(new Dimension(200, 100));
-		makeAccu.setPreferredSize(new Dimension(200, 100));
-		panel.add(nextPlayer);
-		panel.add(makeAccu);
+		panel.add(whoseTurn()); 
+		
+		//Creating button for the next player
+		JButton nextPlayerButton = new JButton("Next Player");
+		
+		panel.add(nextPlayerButton);
+		
+		//Creating a button to make an accusation
+		JButton accuseButton = new JButton("Make Accusation");
+		
+		panel.add(accuseButton); 
+		
 		
 		return panel;
 	}
 	
 	/*
-	 * Adding whose turn box. Lets player know whose turn it is 
+	 * Function for making the whose turn area of the control gui. Creates new panel with lable and returns
+	 * that panel to be added to the main panel. 
 	 */
-	public JPanel whoseTurnBox() {
-		
+	private JPanel whoseTurn() {
 		JPanel panel = new JPanel();
 		
-		JTextField playerTurn;
-		JLabel label = new JLabel("Whose turn?");
+		//Label for the current turn box
+		JLabel whoLabel = new JLabel("Whose Turn?");
 		
-		Border border = BorderFactory.createLineBorder(Color.black);
+		panel.add(whoLabel); 
 		
-		playerTurn = new JTextField(20);
+		//Text field set to a length of 20
+		JTextField turnField = new JTextField(20);
 		
-		playerTurn.setEditable(false);
+		//Making the field uneditable by the player
+		turnField.setEditable(false);
 		
-		playerTurn.setBorder(border);
+		panel.add(turnField);
 		
-		panel.add(label);
-		panel.add(playerTurn);
-		
-		return panel; 
+		return(panel); 
 		
 	}
-	/*\
-	 * Added die roll box has a text feild to display dice roll and a etched border
-	 */
-	public JPanel dieRollBox() {
+	
+	private JPanel makeInfoBoxes() {
 		JPanel panel = new JPanel();
-
-		JTextField rollNum;
-		JLabel label = new JLabel("Roll");
-
-		rollNum = new JTextField(5);
-
-		rollNum.setEditable(false);
-
+		
+		//Adding the roll/die box
+		panel.add(rollInfo());
+		
+		//Adding the information about the current guess of the current player
+		panel.add(guessInfo());
+		
+		//Adding the information about the result of the current guess from the current player
+		panel.add(guessResInfo());
+		
+		return panel;
+	}
+	
+	/*
+	 * Function for make the box that contains the dice roll information for the current player
+	 */
+	private JPanel rollInfo() {
+		
+		JPanel panel = new JPanel();
+		
+		//Setting the panels layout to be a grid with one row and 2 cols 
+		panel.setLayout(new GridLayout(1, 2));
+		
+		//Label for the current dice roll
+		JLabel rollLabel = new JLabel("Roll");
+		
+		panel.add(rollLabel);
+		
+		//Text field to show the current roll
+		JTextField rollValField = new JTextField(5);
+		
+		//Making it so the player can not edit the text box
+		rollValField.setEditable(false);
+		
+		panel.add(rollValField);
+		
+		//Setting this panel to hava a border, etched, and the title of "Die"
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Die"));
 		
-		panel.add(label);
+		return panel;
 		
-		panel.add(rollNum);
 		
-		return panel; 
 	}
 	
 	/*
-	 * Guess box with text field fro displaying the guess and etched border
+	 * Function for adding the panel with the infromation about the current guess of the current player. 
+	 * Adds label and text box for showing the current guess 
 	 */
-	public JPanel guessBox() {
+	private JPanel guessInfo() {
 		JPanel panel = new JPanel();
 		
-		JTextField personGuess;
+		//Setting the layout for the current panel to be a grid with 2 rows and an adjustable number of cols 
+		panel.setLayout(new GridLayout(2,0));
 		
-		JLabel label = new JLabel("Guess");
+		//Label for the current guess text field
+		JLabel guessLabel = new JLabel("Guess");
 		
-		personGuess = new JTextField(20);
+		panel.add(guessLabel);
 		
-		personGuess.setEditable(false);
+		//Text feild for showing the current guess of the current player
+		JTextField guessField = new JTextField(25);
 		
+		//Making it so the user can not edit the text box
+		guessField.setEditable(false);
+		
+		panel.add(guessField);
+		
+		//Making a border that is etched with the title "Guess"
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
-		
-		panel.add(label);
-		
-		panel.add(personGuess);
-		
 		
 		return panel;
 		
+		
 	}
+	
 	/*
-	 * Guess result box with a uneditable text field that will tell the player the result of the guess. 
+	 * Function for adding the panel about the guess result from the current player, had a label and a text field. 
 	 */
-	public JPanel guessResBox() {
+	private JPanel guessResInfo() {
 		JPanel panel = new JPanel();
 		
-		JTextField response;
+		//Setting the layout for the panel as grid layour with 1 row and 2 cols
+		panel.setLayout(new GridLayout(1,2));
 		
-		JLabel label = new JLabel("Response");
+		//Label for the response based on the current guess 
+		JLabel guessResLabel = new JLabel("Response");
 		
-		response = new JTextField(10);
+		panel.add(guessResLabel);
 		
-		response.setEditable(false);
+		//Text field for the response to the guess
+		JTextField guessResField = new JTextField(15); 
 		
-		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
+		//Making the text feild uneditable 
+		guessResField.setEditable(false);
 		
-		panel.add(label);
-		panel.add(response);
+		panel.add(guessResField);
 		
-		return panel; 
-	}
-
-
-
-
-	public static void main(String[] args) {
-		ControlGUI gui = new ControlGUI();
-
-		gui.setVisible(true);
+		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result:"));
+		
+		return panel;
 
 	}
-
-
 }
+
+
