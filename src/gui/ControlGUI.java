@@ -5,6 +5,9 @@
 package gui;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,15 +16,28 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import clueGame.Board;
+
 
 public class ControlGUI extends JPanel {
+	
+	private JButton nextPlayerButton;
+	private JButton accuseButton;
+	
+	public static JTextField turnField;
+	public static JTextField rollValField;
+	
 	
 	public ControlGUI() {
 		setLayout(new GridLayout(2,0)); 
 		
+		
+		
 		add(makeButtons());
 		
 		add(makeInfoBoxes());
+		
+		
 	}
 	
 	/*
@@ -30,19 +46,21 @@ public class ControlGUI extends JPanel {
 	 */
 	private JPanel makeButtons() {
 		JPanel panel = new JPanel();
-		
+		ButtonListener listener = new ButtonListener();
 		//Setting the panels layout to have 1 row and a adjustable number of cols
 		panel.setLayout(new GridLayout(1,0));
 		
 		panel.add(whoseTurn()); 
 		
 		//Creating button for the next player
-		JButton nextPlayerButton = new JButton("Next Player");
+		nextPlayerButton = new JButton("Next Player");
+		
+		nextPlayerButton.addActionListener(listener);
 		
 		panel.add(nextPlayerButton);
 		
 		//Creating a button to make an accusation
-		JButton accuseButton = new JButton("Make Accusation");
+		accuseButton = new JButton("Make Accusation");
 		
 		panel.add(accuseButton); 
 		
@@ -63,7 +81,9 @@ public class ControlGUI extends JPanel {
 		panel.add(whoLabel); 
 		
 		//Text field set to a length of 20
-		JTextField turnField = new JTextField(20);
+		turnField = new JTextField(20);
+		
+		turnField.setText(Board.getInstance().currentPlayer.getPlayerName());
 		
 		//Making the field uneditable by the player
 		turnField.setEditable(false);
@@ -105,10 +125,16 @@ public class ControlGUI extends JPanel {
 		panel.add(rollLabel);
 		
 		//Text field to show the current roll
-		JTextField rollValField = new JTextField(5);
+		rollValField = new JTextField(5);
 		
 		//Making it so the player can not edit the text box
 		rollValField.setEditable(false);
+		
+		Random rand = new Random();
+		
+		int roll = rand.nextInt(5) + 1;
+		
+		rollValField.setText(Integer.toString(roll));
 		
 		panel.add(rollValField);
 		
@@ -177,6 +203,25 @@ public class ControlGUI extends JPanel {
 		
 		return panel;
 
+	}
+	
+	
+	public static void controlNextPlayer() {
+		Board.getInstance().nextPlayer();
+	}
+	
+	
+	private class ButtonListener implements ActionListener {
+		private ButtonListener() {
+			
+		}
+		
+		public void actionPerformed(ActionEvent event) {
+			if(event.getSource() == ControlGUI.this.nextPlayerButton) {
+				controlNextPlayer();
+			}
+			
+		}
 	}
 }
 

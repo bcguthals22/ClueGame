@@ -1,3 +1,69 @@
+commit 5e6df9c484bfa2ead4d2c414361d20a22b089b08
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sat Apr 13 10:35:22 2019 -0600
+
+    Final Commit: Added Comments
+
+commit f1962413aaeb4fd8ee167cc9dadcf1a40f298bec
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sat Apr 13 10:28:23 2019 -0600
+
+    Refactored Control GUI because it was interfering with joining with the board, added the control GUI to frame
+
+commit e4584a053f15a7a14a7573c90f4c454b09071341
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sat Apr 13 09:34:15 2019 -0600
+
+    Added the player card display
+
+commit f97780000770dbb53b42ab6f2fca52836264fefb
+Author: Brennan Guthals <bcguthals@mymail.mines.edu>
+Date:   Fri Apr 12 16:49:30 2019 -0600
+
+    Newest version
+
+commit 27ee990fb0a3385c96732a2b3b9f617df62d3e2f
+Author: Brennan Guthals <bcguthals@mines.edu>
+Date:   Tue Apr 9 12:08:44 2019 -0600
+
+    Added splash screen GUI
+
+commit 1e61a20a4a5294efc2a114e4473ccd4ed2ce9f79
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sat Apr 6 17:00:54 2019 -0600
+
+    Final Commit
+
+commit 5d35d36d637326157ecfb220a46d24d91e3a34d0
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sat Apr 6 16:49:13 2019 -0600
+
+    Added Detective Notes
+
+commit 780ae18658f973c8738f26885181bd1d8ea56167
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sat Apr 6 16:02:45 2019 -0600
+
+    Added Room labels
+
+commit b99a1d45f4a9a1e9236f008e9edb6101b403b010
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sat Apr 6 15:34:38 2019 -0600
+
+    Added file exit
+
+commit 59fb17934d7a3e8c01d2d002f44691a514a40a8e
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sat Apr 6 15:13:48 2019 -0600
+
+    Doors and Players Display
+
+commit a70f624eb81182fc475c74013ba0e009b6f1f3de
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sat Apr 6 14:46:14 2019 -0600
+
+    Added Drawing Cells
+
 commit 9a127df3c7d1a1734fce7fe38cff11f86e769ceb
 Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
 Date:   Sat Apr 6 11:37:24 2019 -0600

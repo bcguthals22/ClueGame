@@ -23,6 +23,8 @@ public class BoardCell {
 	public static int BOARD_CELL_SIZE = 30;
 	
 	public static int DOOR_SIZE = 5;
+	
+	protected boolean highlighted;
 
 	public BoardCell(int row, int column, String room) {
 		super();
@@ -98,8 +100,15 @@ public class BoardCell {
 	 * Draws the boardcells one by one, coloring yellow if walkway and grey if not 
 	 */
 	public void draw(Graphics2D g) {
-
-		if(isWalkway()) {
+		
+		if(this.highlighted) {
+			g.setColor(Color.CYAN);
+			g.fillRect(this.x, this.y, BOARD_CELL_SIZE, BOARD_CELL_SIZE);
+			g.setColor(Color.BLACK);
+			g.drawRect(this.x, this.y, BOARD_CELL_SIZE, BOARD_CELL_SIZE);
+		}
+		
+		else if(isWalkway()) {
 			g.setColor(Color.YELLOW);
 			g.fillRect(this.x, this.y, BOARD_CELL_SIZE, BOARD_CELL_SIZE);
 			g.setColor(Color.BLACK);
@@ -156,6 +165,13 @@ public class BoardCell {
 	
 	public void drawRoomName(String name, int x, int y, Graphics2D g) {
 		g.drawString(name, x, y);
+	}
+	
+	/*
+	 * Function for setting the highlight status of the cell
+	 */
+	public void setPossibleTarget(boolean highlight) {
+		this.highlighted = highlight;
 	}
 	
 	

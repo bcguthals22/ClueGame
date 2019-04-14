@@ -58,6 +58,8 @@ public class ClueGame extends JFrame{
 		
 		setSize(820, 880);
 		
+	 
+		
 		playerGUI = new PlayerGUI(this.board);
 		
 		add(playerGUI, BorderLayout.EAST);
@@ -76,7 +78,10 @@ public class ClueGame extends JFrame{
 		
 	}
 	
-	
+	/*
+	 * Function for making the splash screen, lets the user know which character they are and what color your piece 
+	 * is, in addition to telling them how to move the turn fowrward. 
+	 */
 	private void makeSplash() {
 		JOptionPane.showMessageDialog(null, "You are " + board.playerNames.get(0) + " and your color is " + board.playerColors.get(0) + " , press Next Player to play", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
 

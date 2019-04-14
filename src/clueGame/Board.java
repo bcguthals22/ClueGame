@@ -21,6 +21,8 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
+import gui.ControlGUI;
+
 import java.util.*;
 
 
@@ -55,6 +57,10 @@ public class Board extends JPanel{
 	public String boardConfigFile;
 
 	public String roomConfigFile;
+	
+	public Player currentPlayer;
+	
+	public int currentPlayerNumber;
 
 	private Solution answer;
 	//Variable used for testing
@@ -107,6 +113,10 @@ public class Board extends JPanel{
 		
 		
 		dealCards();
+		
+		currentPlayerNumber = 0;
+		
+		currentPlayer = players.get(currentPlayerNumber);
 		
 		
 		
@@ -595,6 +605,42 @@ public class Board extends JPanel{
 			p.drawPlayer(g, this); 
 		}
 		
+	}
+	
+	/*
+	 * Function that tells the board to set a highlight condition to a cell if it is in the target list 
+	 * and is passed in a true value
+	 */
+	public void highlightSquare(boolean highlight) {
+		if(this.targets != null) {
+			for(BoardCell cell : this.targets) {
+				cell.setPossibleTarget(highlight);
+			}
+		}
+	}
+	/*
+	 * Function for handeling when the next player button is pushed. Updates the current player and changes the displayed
+	 * name
+	 */
+	public void nextPlayer() {
+		currentPlayerNumber = (currentPlayerNumber + 1);
+		
+		if(currentPlayerNumber == 6) {
+			currentPlayerNumber = 0;
+		}
+		
+		currentPlayer = players.get(currentPlayerNumber);
+		
+		ControlGUI.turnField.setText(currentPlayer.getPlayerName());
+		
+		Random rand = new Random();
+		
+		//Rolling a dice bewtween 1 and 6
+		int roll = rand.nextInt(5) + 1;
+		
+		ControlGUI.rollValField.setText(Integer.toString(roll));
+		
+		repaint();
 	}
 	
 	
