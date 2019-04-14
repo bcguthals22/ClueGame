@@ -61,6 +61,8 @@ public class Board extends JPanel{
 	public Player currentPlayer;
 	
 	public int currentPlayerNumber;
+	
+	public int firstRoll;
 
 	private Solution answer;
 	//Variable used for testing
@@ -117,6 +119,16 @@ public class Board extends JPanel{
 		currentPlayerNumber = 0;
 		
 		currentPlayer = players.get(currentPlayerNumber);
+		
+		
+		
+		Random rand =  new Random();
+		
+		firstRoll = rand.nextInt(6) + 1;
+		
+		calcTargets(currentPlayer.getRow(),currentPlayer.getColumn(), firstRoll);
+		
+		highlightSquare(true);
 		
 		
 		
@@ -623,11 +635,14 @@ public class Board extends JPanel{
 	 * name
 	 */
 	public void nextPlayer() {
+		highlightSquare(false);
+		
 		currentPlayerNumber = (currentPlayerNumber + 1);
 		
 		if(currentPlayerNumber == 6) {
 			currentPlayerNumber = 0;
 		}
+		
 		
 		currentPlayer = players.get(currentPlayerNumber);
 		
@@ -636,9 +651,15 @@ public class Board extends JPanel{
 		Random rand = new Random();
 		
 		//Rolling a dice bewtween 1 and 6
-		int roll = rand.nextInt(5) + 1;
+		int roll = rand.nextInt(6) + 1;
 		
 		ControlGUI.rollValField.setText(Integer.toString(roll));
+		
+		calcTargets(currentPlayer.getRow(), currentPlayer.getColumn(), roll);
+		
+		if(currentPlayerNumber == 0) {
+			highlightSquare(true);
+		}
 		
 		repaint();
 	}

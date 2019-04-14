@@ -130,11 +130,7 @@ public class ControlGUI extends JPanel {
 		//Making it so the player can not edit the text box
 		rollValField.setEditable(false);
 		
-		Random rand = new Random();
-		
-		int roll = rand.nextInt(5) + 1;
-		
-		rollValField.setText(Integer.toString(roll));
+		rollValField.setText(Integer.toString(Board.getInstance().firstRoll));
 		
 		panel.add(rollValField);
 		
