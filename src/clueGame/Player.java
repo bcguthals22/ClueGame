@@ -11,7 +11,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Player {
+public abstract class Player {
 
 	private String playerName;
 
@@ -26,6 +26,8 @@ public class Player {
 	public ArrayList<Card> hand = new ArrayList();
 
 	public ArrayList<Card> seenCards = new ArrayList();
+	
+	public boolean notFinished = false;
 
 	public Player() {
 
@@ -131,7 +133,9 @@ public class Player {
 		g.drawOval(x, y, size, size);
 		
 	}
+	
+	public abstract void move(Board board);
 
-
+	public abstract void finishTurn(BoardCell cell);
 
 }

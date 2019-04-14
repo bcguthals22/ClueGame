@@ -115,4 +115,13 @@ public class ComputerPlayer extends Player {
 		return suggestion.person;
 	}
 
+	@Override
+	public void move(Board board) {
+		notFinished = false;
+	}
+	@Override
+	public void finishTurn(BoardCell cell) {
+		
+	}
+
 }

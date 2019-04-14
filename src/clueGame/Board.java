@@ -8,6 +8,8 @@ package clueGame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 
 import java.io.FileReader;
@@ -19,6 +21,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import gui.ControlGUI;
@@ -27,7 +30,7 @@ import java.util.*;
 
 
 
-public class Board extends JPanel{
+public class Board extends JPanel implements MouseListener{
 	private static final int MAX_BOARD_SIZE = 100; 
 	private int numRows;
 	private int numColumns; 
@@ -115,6 +118,8 @@ public class Board extends JPanel{
 		
 		
 		dealCards();
+		
+		addMouseListener(this);
 		
 		currentPlayerNumber = 0;
 		
@@ -637,6 +642,7 @@ public class Board extends JPanel{
 	public void nextPlayer() {
 		highlightSquare(false);
 		
+		
 		currentPlayerNumber = (currentPlayerNumber + 1);
 		
 		if(currentPlayerNumber == 6) {
@@ -657,11 +663,69 @@ public class Board extends JPanel{
 		
 		calcTargets(currentPlayer.getRow(), currentPlayer.getColumn(), roll);
 		
-		if(currentPlayerNumber == 0) {
-			highlightSquare(true);
-		}
+		currentPlayer.move(this);
 		
 		repaint();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 * 
+	 * A mouse event function determines if the clicked position by the player is valid. 
+	 * 
+	 */
+	public void mouseClicked(MouseEvent event) {
+		
+		
+		
+		BoardCell clicked = getCliked(event.getX(), event.getY());
+		
+		if (clicked == null) {
+			JOptionPane.showMessageDialog(null, "That is not a valid target");
+		}
+		
+		else {
+			currentPlayer.finishTurn(clicked);
+			
+			highlightSquare(false);
+			
+			repaint();
+		}
+	}
+	private BoardCell getCliked(int clickedX, int clickedY) {
+		int row = clickedY / BoardCell.BOARD_CELL_SIZE;
+		int col = clickedX / BoardCell.BOARD_CELL_SIZE;
+		BoardCell clicked = board[row][col];
+		if(targets.contains(clicked)) {
+			return clicked;
+		}
+		
+		else {
+			return null;
+		}
+	}
+	
+	/*
+	 *Functions below track when the mouse is clicked and then authomatically calls the mouse listener function
+	 *
+	 *
+	 */
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		
 	}
 	
 	
