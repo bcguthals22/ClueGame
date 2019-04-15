@@ -1,3 +1,33 @@
+commit 7c19673e064f986c025db59bca83d06dc65397fb
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Mon Apr 15 11:20:46 2019 -0600
+
+    Final Commit: Added Comments and refactored minor issues
+
+commit be2e20cb2c32fda8949ffe5861bcf85f4bedda33
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Mon Apr 15 10:53:10 2019 -0600
+
+    Added random movement to computer players
+
+commit afa4a149c0c40a2e6e55ef6ad31781c5b1943284
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sun Apr 14 15:26:28 2019 -0600
+
+    Got human player to move
+
+commit 1406c2a66310dd22427c3138b95cca887208f377
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sun Apr 14 14:38:11 2019 -0600
+
+    Added highlighting players potential targets
+
+commit e59576ee0cd49e3e7733d430e6722b67e5449557
+Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
+Date:   Sun Apr 14 13:56:27 2019 -0600
+
+    Display Name and Display Random Roll added
+
 commit 5e6df9c484bfa2ead4d2c414361d20a22b089b08
 Author: Nicholas Wenzel <nwenzel@mymail.mined.edu>
 Date:   Sat Apr 13 10:35:22 2019 -0600
