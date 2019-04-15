@@ -89,6 +89,8 @@ public class Board extends JPanel implements MouseListener{
 	}
 	public void initialize() {
 		try {
+			
+			//Loading the rooms weaons and people from config files
 			loadRoomConfig();
 
 			loadBoardConfig();
@@ -113,14 +115,17 @@ public class Board extends JPanel implements MouseListener{
 			e.getMessage();
 		} catch (BadConfigFormatException e) {
 			e.getMessage();		}
-
+		
+		//Calculate the cell adjacencies
 		calcAdjacencies(); 
 		
-		
+		//Deal the cards as evenly as possible between each of the 6 players
 		dealCards();
 		
+		//Add a mouse listener object to the board, calls mouse specific functions
 		addMouseListener(this);
 		
+		//Set the current player number to 0 and the current player to the human
 		currentPlayerNumber = 0;
 		
 		currentPlayer = players.get(currentPlayerNumber);
@@ -129,10 +134,13 @@ public class Board extends JPanel implements MouseListener{
 		
 		Random rand =  new Random();
 		
+		//Roll random d6 for the first round since next player can not be called
 		firstRoll = rand.nextInt(6) + 1;
 		
+		//Calculate the possible targets for the human players first turn, subsequent calls will be handled by nextPlayer
 		calcTargets(currentPlayer.getRow(),currentPlayer.getColumn(), firstRoll);
 		
+		//Highlight possible choices for human player
 		highlightSquare(true);
 		
 		
@@ -642,6 +650,7 @@ public class Board extends JPanel implements MouseListener{
 	public void nextPlayer() {
 		highlightSquare(false);
 		
+		//If the current players finished status is false have a pop up that prompts the user to finihs their turn
 		if(!currentPlayer.finished) {
 			JOptionPane.showMessageDialog(null, "You must finish your turn");
 			
@@ -652,6 +661,7 @@ public class Board extends JPanel implements MouseListener{
 		
 		currentPlayerNumber = (currentPlayerNumber + 1);
 		
+		//If the current player number value is greater than 5 reset to zero
 		if(currentPlayerNumber == 6) {
 			currentPlayerNumber = 0;
 		}
@@ -659,6 +669,7 @@ public class Board extends JPanel implements MouseListener{
 		
 		currentPlayer = players.get(currentPlayerNumber);
 		
+		//Setting the control GUI text field with the current player
 		ControlGUI.turnField.setText(currentPlayer.getPlayerName());
 		
 		Random rand = new Random();
@@ -666,12 +677,16 @@ public class Board extends JPanel implements MouseListener{
 		//Rolling a dice bewtween 1 and 6
 		int roll = rand.nextInt(6) + 1;
 		
+		//Updating control GUI Roll field with the random roll
 		ControlGUI.rollValField.setText(Integer.toString(roll));
 		
+		//Calculating the possible targets for the current player
 		calcTargets(currentPlayer.getRow(), currentPlayer.getColumn(), roll);
 		
+		//Move the current player different between computer and human
 		currentPlayer.move(this);
 		
+		//Repaint the board with the new player locations and highlighted squares if the currentPlayer is human
 		repaint();
 	}
 	
@@ -685,29 +700,44 @@ public class Board extends JPanel implements MouseListener{
 	public void mouseClicked(MouseEvent event) {
 		
 		
-		
+		//Getting the clicked on board cell
 		BoardCell clicked = getCliked(event.getX(), event.getY());
 		
+		//If the getClicked function returns null then the user clicked on a space the is not valid
 		if (clicked == null) {
+			
+			//If the user selected a non valid target square have a pop up that prompts for reselection
 			JOptionPane.showMessageDialog(null, "That is not a valid target");
 		}
 		
+		//If the user selected a valid cell then call the current playters finishe turn function and unhighlight squares
 		else {
 			currentPlayer.finishTurn(clicked);
 			
 			highlightSquare(false);
 			
+			//Repaint the board with the unhighlighted squares
 			repaint();
 		}
 	}
+	
+	/*
+	 * Function fo calculating the board cell the user clicked, first get the x and y pixel values that
+	 * the user clicked and divide them by the board cell size to determine what cell the user clicked 
+	 * 
+	 */
 	private BoardCell getCliked(int clickedX, int clickedY) {
 		int row = clickedY / BoardCell.BOARD_CELL_SIZE;
 		int col = clickedX / BoardCell.BOARD_CELL_SIZE;
+		
 		BoardCell clicked = board[row][col];
+		
+		//If the clicked cell is in the targets list return that cell
 		if(targets.contains(clicked)) {
 			return clicked;
 		}
 		
+		//Else return null
 		else {
 			return null;
 		}

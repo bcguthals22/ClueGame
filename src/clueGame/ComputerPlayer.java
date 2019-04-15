@@ -1,3 +1,7 @@
+/*
+ * Authors Nicholas Wenzel and Brennen Guthals
+ */
+
 package clueGame;
 
 import java.awt.Color;
@@ -15,7 +19,9 @@ public class ComputerPlayer extends Player {
 		seenCards = new ArrayList();
 		suggestion = new Solution();
 	}
-
+	/*
+	 * Constructor for newComputer players with name, color and starting location
+	 */
 	public ComputerPlayer(String name, int row, int col, Color color) {
 		super();
 		this.setPlayerName(name);
@@ -25,11 +31,17 @@ public class ComputerPlayer extends Player {
 		seenCards = new ArrayList();
 		suggestion = new Solution();
 	}
-
+	
+	/*
+	 * Function for picking the next location of the computer players
+	 */
 	public BoardCell pickLocation(Set<BoardCell> targets) {
 		Random rand = new Random();
+		
 		BoardCell pick = new BoardCell();
+		
 		int counter = 0;
+		
 		int index = rand.nextInt(targets.size());
 		for(BoardCell cell : targets) {
 			//See if room, and if it was last visited, if not set as last visited and pick room
@@ -51,7 +63,10 @@ public class ComputerPlayer extends Player {
 
 	public void makeAccusation(Solution accusation) {
 	}
-
+	/*
+	 * Function that handels creating suggestions for computer players. Takes in a string as a room
+	 * and makes a guess based on the seen cards in its hand and from previous suggestings 
+	 */
 	public void createSuggestion(String room) {
 		suggestion.room = room;
 
@@ -114,38 +129,32 @@ public class ComputerPlayer extends Player {
 	public String getSuggestedPerson() {
 		return suggestion.person;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see clueGame.Player#move(clueGame.Board)
+	 * 
+	 * Function for moving the computer players. Uses the pickLocation function and the current targets list 
+	 * and sets the new location to one of these possible targets. 
+	 */
 	@Override
 	public void move(Board board) {
 		finished = true;
 		
 		Set<BoardCell> targets = Board.getInstance().targets;
 		
-		BoardCell newLoc = newLocation(targets);
+		BoardCell newLoc = pickLocation(targets);
 		
 		setRow(newLoc.row);
 		setColumn(newLoc.column);
 		
 	}
 	
-	public BoardCell newLocation(Set<BoardCell> targets) {
-		Random rand = new Random();
-		
-		int loc = rand.nextInt(targets.size());
-		
-		int idex = 0;
-		
-		BoardCell newLoc = null;
-		
-		for(BoardCell cell: targets) {
-			if (idex == loc) {
-				newLoc = cell;
-			}
-			idex++;
-		}
-		
-		return newLoc;
-	}
+	/*
+	 * (non-Javadoc)
+	 * @see clueGame.Player#finishTurn(clueGame.BoardCell)
+	 * 
+	 * In computer player this function does nothing becuase the movement is autonomouse
+	 */
 	@Override
 	public void finishTurn(BoardCell cell) {
 		

@@ -48,7 +48,7 @@ public class PlayerTests {
 		Player player = board.players.get(0);
 		assertEquals("Mal Reynolds",player.getPlayerName());
 		assertEquals(Color.red,player.getColor());
-		assertEquals(0,player.getColumn());
+		assertEquals(3,player.getColumn());
 		assertEquals(0,player.getRow());
 		assertEquals(player.type,PlayerType.HUMAN);
 	}
@@ -64,8 +64,8 @@ public class PlayerTests {
 		Player player = board.players.get(2);
 		assertEquals("Garrus Vakarian",player.getPlayerName());
 		assertEquals(Color.blue,player.getColor());
-		assertEquals(15,player.getColumn());
-		assertEquals(10,player.getRow());
+		assertEquals(21,player.getColumn());
+		assertEquals(5,player.getRow());
 		assertEquals(player.type,PlayerType.COMPUTER);
 	}
 
@@ -80,7 +80,7 @@ public class PlayerTests {
 		Player player = board.players.get(5);
 		assertEquals("John Galt",player.getPlayerName());
 		assertEquals(Color.black,player.getColor());
-		assertEquals(15,player.getColumn());
+		assertEquals(13,player.getColumn());
 		assertEquals(20,player.getRow());
 		assertEquals(player.type,PlayerType.COMPUTER);
 	}
@@ -140,18 +140,6 @@ public class PlayerTests {
 	 */
 	
 
-	@Test
-	public void testDealCards() {
-		board.dealCards();
-	
-		int handSize = (board.deck.size())/board.players.size();
-		Player player1 = board.players.get(0);
-		assertTrue((handSize -1) <= player1.hand.size() && player1.hand.size() <= (handSize+1));
-		Player player3 = board.players.get(2);
-		assertTrue((handSize -1) <= player3.hand.size() && player3.hand.size() <= (handSize+1));
-		Player player6 = board.players.get(5); 
-		assertTrue((handSize -1) <= player6.hand.size() && player6.hand.size() <= (handSize+1));
-	}
 
 	
 
