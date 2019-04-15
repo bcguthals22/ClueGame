@@ -13,7 +13,7 @@ public class HumanPlayer extends Player {
 
 	@Override
 	public void move(Board board) {
-		notFinished = true;
+		finished = false;
 		
 		board.highlightSquare(true);
 		
@@ -21,12 +21,14 @@ public class HumanPlayer extends Player {
 	
 	
 	public boolean getFinStatus() {
-		return notFinished;
+		return finished;
 	}
 	
 	@Override
 	public void finishTurn(BoardCell clicked) {
 		setRow(clicked.row);
 		setColumn(clicked.column);
+		
+		finished = true; 
 	}
 }

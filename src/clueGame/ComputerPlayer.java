@@ -117,7 +117,34 @@ public class ComputerPlayer extends Player {
 
 	@Override
 	public void move(Board board) {
-		notFinished = false;
+		finished = true;
+		
+		Set<BoardCell> targets = Board.getInstance().targets;
+		
+		BoardCell newLoc = newLocation(targets);
+		
+		setRow(newLoc.row);
+		setColumn(newLoc.column);
+		
+	}
+	
+	public BoardCell newLocation(Set<BoardCell> targets) {
+		Random rand = new Random();
+		
+		int loc = rand.nextInt(targets.size());
+		
+		int idex = 0;
+		
+		BoardCell newLoc = null;
+		
+		for(BoardCell cell: targets) {
+			if (idex == loc) {
+				newLoc = cell;
+			}
+			idex++;
+		}
+		
+		return newLoc;
 	}
 	@Override
 	public void finishTurn(BoardCell cell) {

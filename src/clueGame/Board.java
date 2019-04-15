@@ -642,6 +642,13 @@ public class Board extends JPanel implements MouseListener{
 	public void nextPlayer() {
 		highlightSquare(false);
 		
+		if(!currentPlayer.finished) {
+			JOptionPane.showMessageDialog(null, "You must finish your turn");
+			
+			return;
+
+		}
+		
 		
 		currentPlayerNumber = (currentPlayerNumber + 1);
 		
