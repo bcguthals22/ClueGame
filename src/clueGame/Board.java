@@ -546,14 +546,28 @@ public class Board extends JPanel implements MouseListener{
 	public void dealCards() {
 		ArrayList<Card> vist = new ArrayList<Card>();
 		int playerCount = 0;
-		while(vist.size() != 23) {
+		int randPerson = new Random().nextInt(playerNames.size());
+		answer.person = playerNames.get(randPerson);
+		String personName = playerNames.get(randPerson);
+		
+		int randWeapon = new Random().nextInt(weapNames.size());
+		answer.weapon = weapNames.get(randPerson);
+		String weaponName = weapNames.get(randPerson);
+		
+		int randRoom = new Random().nextInt(roomNames.size());
+		answer.room = roomNames.get(randPerson);
+		String roomName = roomNames.get(randPerson);
+		
+		while(vist.size() != 20) {
 			int num = new Random().nextInt(deck.size());
 			Card card = deck.get(num);
 
 			if (vist.contains(card)) {
 				continue;
 			}
-
+			else if(card.getCardName() == personName || card.getCardName() == weaponName || card.getCardName() == roomName) {
+				continue;
+			}
 			else {
 
 				Player player = players.get(playerCount);

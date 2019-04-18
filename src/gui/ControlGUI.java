@@ -26,7 +26,8 @@ public class ControlGUI extends JPanel {
 	
 	public static JTextField turnField;
 	public static JTextField rollValField;
-	
+	public static JTextField guessField;
+	public static JTextField guessResField;
 	
 	public ControlGUI() {
 		setLayout(new GridLayout(2,0)); 
@@ -158,7 +159,7 @@ public class ControlGUI extends JPanel {
 		panel.add(guessLabel);
 		
 		//Text feild for showing the current guess of the current player
-		JTextField guessField = new JTextField(25);
+		guessField = new JTextField(25);
 		
 		//Making it so the user can not edit the text box
 		guessField.setEditable(false);
@@ -188,7 +189,7 @@ public class ControlGUI extends JPanel {
 		panel.add(guessResLabel);
 		
 		//Text field for the response to the guess
-		JTextField guessResField = new JTextField(15); 
+		guessResField = new JTextField(15); 
 		
 		//Making the text feild uneditable 
 		guessResField.setEditable(false);

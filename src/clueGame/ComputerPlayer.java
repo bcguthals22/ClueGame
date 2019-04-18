@@ -9,12 +9,16 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 
+import gui.ControlGUI;
+
 public class ComputerPlayer extends Player {
 
 	private char lastVisitedRoom;
 
 	private Solution suggestion;
 
+	private String currentRoom;
+	
 	public ComputerPlayer() {
 		seenCards = new ArrayList();
 		suggestion = new Solution();
@@ -146,6 +150,51 @@ public class ComputerPlayer extends Player {
 		
 		setRow(newLoc.row);
 		setColumn(newLoc.column);
+		
+		if(newLoc.isDoorway()) {
+			String initial = newLoc.getInitial();
+			switch(initial) {
+			case "C":
+				currentRoom = "Cloak Room";
+				break;
+			case "G":
+				currentRoom = "Gallery";
+				break;
+			case "A":
+				currentRoom = "Archery Range";
+				break;
+			case "D":
+				currentRoom = "Drawing Room";
+				break;
+			case "I":
+				currentRoom = "Wine Cellar";
+				break;
+			case "S":
+				currentRoom = "Stables";
+				break;
+			case "R":
+				currentRoom = "Billiard Room";
+				break;
+			case "K":
+				currentRoom = "Kitchen";
+				break;
+			case "B":
+				currentRoom = "Ballroom";
+				break;
+			case "P":
+				currentRoom = "Parking Garage";
+				break;
+			case "L":
+				currentRoom = "Swimming Pool";
+				break;
+			}
+			createSuggestion(currentRoom);
+			ControlGUI.guessField.setText(suggestion.person + " " + suggestion.room + " " + suggestion.weapon);
+			
+			Card card = Board.getInstance().handleSuggestion(suggestion, this);
+			
+			ControlGUI.guessResField.setText(card.getCardName());
+		}
 		
 	}
 	
