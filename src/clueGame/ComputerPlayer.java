@@ -66,9 +66,10 @@ public class ComputerPlayer extends Player {
 	}
 
 	public void makeAccusation(Solution accusation) {
+		
 	}
 	/*
-	 * Function that handels creating suggestions for computer players. Takes in a string as a room
+	 * Function that handles creating suggestions for computer players. Takes in a string as a room
 	 * and makes a guess based on the seen cards in its hand and from previous suggestings 
 	 */
 	public void createSuggestion(String room) {
@@ -150,6 +151,8 @@ public class ComputerPlayer extends Player {
 		
 		setRow(newLoc.row);
 		setColumn(newLoc.column);
+		
+		lastVisitedRoom = newLoc.getInitial().charAt(0); 
 		
 		if(newLoc.isDoorway()) {
 			String initial = newLoc.getInitial();

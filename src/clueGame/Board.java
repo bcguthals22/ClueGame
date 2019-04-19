@@ -66,6 +66,8 @@ public class Board extends JPanel implements MouseListener{
 	public int currentPlayerNumber;
 	
 	public int firstRoll;
+	
+	public boolean flag = false;
 
 	private Solution answer;
 	//Variable used for testing
@@ -508,12 +510,14 @@ public class Board extends JPanel implements MouseListener{
 						p.updateSeenCards(card);
 					}
 					playerDisprove = player.getPlayerName();
+					flag = false;
 					return card;
 				}
 			}
 			numAsked++;
 		}
-
+		
+		flag = true;
 		return null;
 	}
 
