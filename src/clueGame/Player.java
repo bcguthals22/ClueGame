@@ -27,6 +27,8 @@ public abstract class Player {
 
 	public ArrayList<Card> seenCards = new ArrayList();
 	
+	public boolean flag = false;
+	
 	public boolean finished = false;
 
 	public Player() {

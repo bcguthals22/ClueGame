@@ -1,5 +1,5 @@
 /*
- * Authors Nicholas Wenzel and Brennen Guthals
+ * Authors Nicholas Wenzel and Brennan Guthals
  */
 
 package clueGame;
@@ -16,6 +16,8 @@ public class ComputerPlayer extends Player {
 	private char lastVisitedRoom;
 
 	private Solution suggestion;
+	
+	private Solution accusation;
 
 	private String currentRoom;
 	
@@ -73,6 +75,7 @@ public class ComputerPlayer extends Player {
 	 * and makes a guess based on the seen cards in its hand and from previous suggestings 
 	 */
 	public void createSuggestion(String room) {
+		
 		suggestion.room = room;
 
 		ArrayList<Card> people= new ArrayList();
@@ -191,9 +194,18 @@ public class ComputerPlayer extends Player {
 				currentRoom = "Swimming Pool";
 				break;
 			}
+			if(flag == true) {
+				makeAccusation(accusation);
+			}
 			createSuggestion(currentRoom);
 			ControlGUI.guessField.setText(suggestion.person + " " + suggestion.room + " " + suggestion.weapon);
 			
+			//Set flag if nobody can disprove suggestion. Next turn, computer will make use that suggestion as an accusation
+			if(Board.getInstance().handleSuggestion(suggestion,this) == null) {
+				accusation = new Solution();
+				accusation = suggestion;
+				flag = true;
+			}
 			Card card = Board.getInstance().handleSuggestion(suggestion, this);
 			
 			ControlGUI.guessResField.setText(card.getCardName());
