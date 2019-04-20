@@ -250,7 +250,14 @@ public class ComputerPlayer extends Player {
 			}
 			Card card = Board.getInstance().handleSuggestion(suggestion, this);
 			
-			ControlGUI.guessResField.setText(card.getCardName());
+			//If nobody is able to disprove, then say No new clue, if somebody can disprove, show the card
+			if(card.getCardName() == null) {
+				ControlGUI.guessResField.setText("No new clue");
+			}
+			else {
+				ControlGUI.guessResField.setText(card.getCardName());
+
+			}
 		}
 		
 	}
