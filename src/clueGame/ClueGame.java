@@ -28,7 +28,7 @@ public class ClueGame extends JFrame{
 	private PlayerGUI playerGUI;
 	
 	private DetectiveNotes detNotes = new DetectiveNotes();
-	
+		
 	public ClueGame() {
 		setup();
 		
@@ -72,7 +72,7 @@ public class ClueGame extends JFrame{
 		makeMenu();
 		
 		
-		makeSplash();
+		//makeSplash();
 		
 		
 		
@@ -82,8 +82,8 @@ public class ClueGame extends JFrame{
 	 * Function for making the splash screen, lets the user know which character they are and what color your piece 
 	 * is, in addition to telling them how to move the turn fowrward. 
 	 */
-	private void makeSplash() {
-		JOptionPane.showMessageDialog(null, "You are " + board.playerNames.get(0) + " and your color is " + board.playerColors.get(0) + " , press Next Player to play", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
+	private static void makeSplash() {
+		JOptionPane.showMessageDialog(null, "You are " + Board.getInstance().playerNames.get(0) + " and your color is " + Board.getInstance().playerColors.get(0) + " , press Next Player to play", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
 
 	}
 	
@@ -136,7 +136,7 @@ public class ClueGame extends JFrame{
 
 	public static void main(String[] args) {
 		ClueGame clueGame = new ClueGame();
-
 		clueGame.setVisible(true);
+		clueGame.makeSplash();
 	}
 }
