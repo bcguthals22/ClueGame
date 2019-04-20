@@ -716,7 +716,7 @@ public class Board extends JPanel implements MouseListener{
 		
 		
 		//Getting the clicked on board cell
-		BoardCell clicked = getCliked(event.getX(), event.getY());
+		BoardCell clicked = getClicked(event.getX(), event.getY());
 		
 		//If the getClicked function returns null then the user clicked on a space the is not valid
 		if (clicked == null) {
@@ -741,7 +741,7 @@ public class Board extends JPanel implements MouseListener{
 	 * the user clicked and divide them by the board cell size to determine what cell the user clicked 
 	 * 
 	 */
-	private BoardCell getCliked(int clickedX, int clickedY) {
+	private BoardCell getClicked(int clickedX, int clickedY) {
 		int row = clickedY / BoardCell.BOARD_CELL_SIZE;
 		int col = clickedX / BoardCell.BOARD_CELL_SIZE;
 		
