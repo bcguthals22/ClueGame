@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 import gui.ControlGUI;
 
 public class ComputerPlayer extends Player {
@@ -67,8 +69,18 @@ public class ComputerPlayer extends Player {
 		return pick; 
 	}
 
+	//If computer makes correct accusation, tells player that they won and ends game, if computer makes incorrect accusation, tells player computer made wrong guess
 	public void makeAccusation(Solution accusation) {
+		boolean didWin = Board.getInstance().checkAccusation(accusation);
 		
+		if(didWin == true) {
+			JOptionPane.showMessageDialog(null, "The computer won with a correct guess of " + accusation.person + " " + accusation.room + " " + accusation.weapon);
+			System.exit(0);
+		}
+		else if(didWin == false) {
+			JOptionPane.showMessageDialog(null, "The computer made an incorrect accusation of " + accusation.person + " " + accusation.room + " " + accusation.weapon);
+			
+		}
 	}
 	/*
 	 * Function that handles creating suggestions for computer players. Takes in a string as a room
@@ -115,6 +127,33 @@ public class ComputerPlayer extends Player {
 		suggestion.weapon = weapons.get(random).getCardName();
 
 	}
+	
+	//Check to see if computer has seen any card in a suggestion
+	public boolean haveCard(Solution suggestion) {
+		String suggestionRoom = suggestion.room;
+		String suggestionWeapon = suggestion.weapon;
+		String suggestionPerson = suggestion.person;
+		
+		for(Card card : seenCards) {
+			if(card.getCardName().equals(suggestionRoom)) {
+				return true;
+			}
+		}
+		
+		for(Card card : seenCards) {
+			if(card.getCardName().equals(suggestionPerson)) {
+				return true;
+			}
+		}
+		
+		for(Card card : seenCards) {
+			if(card.getCardName().equals(suggestionWeapon)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
 	//Function to allow for proper testing
 	public void setLastVisited(char c) {
@@ -146,6 +185,11 @@ public class ComputerPlayer extends Player {
 	 */
 	@Override
 	public void move(Board board) {
+		//If nobody could disprove last suggestion, make accusation;
+		if(flag == true) {
+			makeAccusation(accusation);
+		}
+		
 		finished = true;
 		
 		Set<BoardCell> targets = Board.getInstance().targets;
@@ -194,14 +238,12 @@ public class ComputerPlayer extends Player {
 				currentRoom = "Swimming Pool";
 				break;
 			}
-			if(flag == true) {
-				makeAccusation(accusation);
-			}
+			
 			createSuggestion(currentRoom);
 			ControlGUI.guessField.setText(suggestion.person + " " + suggestion.room + " " + suggestion.weapon);
 			
 			//Set flag if nobody can disprove suggestion. Next turn, computer will make use that suggestion as an accusation
-			if(Board.getInstance().handleSuggestion(suggestion,this) == null) {
+			if(Board.getInstance().handleSuggestion(suggestion,this) == null && haveCard(suggestion) == false) {
 				accusation = new Solution();
 				accusation = suggestion;
 				flag = true;
