@@ -47,6 +47,7 @@ public class AccuseGUI extends JDialog{
 		
 		rooms = new JComboBox();
 		
+		
 		for(String room: board.roomNames) {
 			rooms.addItem(room);
 		}

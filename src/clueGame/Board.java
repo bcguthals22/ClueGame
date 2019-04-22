@@ -539,10 +539,10 @@ public class Board extends JPanel implements MouseListener{
 	public void updatePlayers(ArrayList<Player> players) {
 		this.players = players;
 	}
-
+	/*
+	 * Funstion for testing if the accusation made by human or computer is correct
+	 */
 	public boolean checkAccusation(Solution accusation) {
-		
-		System.out.println(answer.person + answer.room + answer.weapon);
 		
 		int numRight = 0;
 		if(accusation.person.contains(answer.person)) {
@@ -734,10 +734,14 @@ public class Board extends JPanel implements MouseListener{
 	
 	}
 	
+	/*
+	 *Function for handeling the accusations of the human players 
+	 */
 	public void accuse() {
 		
 		boolean result = false;
 		
+		//If the current player is not human then the player can not click the make accusation buttons
 		if(currentPlayer.type != PlayerType.HUMAN) {
 			JOptionPane.showMessageDialog(null, "You can not accuse when it is not your turn");
 			return;
@@ -747,17 +751,21 @@ public class Board extends JPanel implements MouseListener{
 		
 		accuseGUI.setVisible(true);
 		
+		//If the marker has been set then test the accusation
 		if(accuseGUI.go) {
 			Solution acusation = accuseGUI.accusation;
 			
+			//Test the accusation
 			result = checkAccusation(acusation);
 			
+			//If the player is correct show message and close the window
 			if(result) {
 				JOptionPane.showMessageDialog(null, "WOO! You win!");
 				
 				System.exit(0);
 			}
 			
+			//If they are wrong show the message 
 			else {
 				JOptionPane.showMessageDialog(null, "Sorry, not correct.");
 			}
@@ -835,12 +843,14 @@ public class Board extends JPanel implements MouseListener{
 					currentRoom = "Swimming Pool";
 					break;
 				}
+				//When in the room add a guess gui
 				GuessGUI guessGUI = new GuessGUI(currentRoom);
 				
 				
 				guessGUI.setVisible(true);
 				
 				
+				//If the marker is set then set the solution and handle the suggestion to see if another player can disprove
 				if(guessGUI.go) {
 					ControlGUI.guessField.setText(guessGUI.guess.person + ", " + guessGUI.guess.room + ", " + guessGUI.guess.weapon);
 					handleSuggestion(guessGUI.guess, this.currentPlayer);
