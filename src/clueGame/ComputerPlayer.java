@@ -88,6 +88,7 @@ public class ComputerPlayer extends Player {
 	 */
 	public void createSuggestion(String room) {
 		
+		//Makes the players current room the suggested room. 
 		suggestion.room = room;
 
 		ArrayList<Card> people= new ArrayList();
@@ -120,9 +121,21 @@ public class ComputerPlayer extends Player {
 		}
 
 		Random rand = new Random();
-
+		
+		//Choosing random person to suggest
 		int random = rand.nextInt(people.size());
 		suggestion.person = people.get(random).getCardName();
+		
+		//When a computer player makes a suggestion it moves the player it suggested to the room it is currently in 
+		//Allows for computer players to go into more rooms than just the two they happen to be nearest at the start of the game. 
+		for(Player p: Board.getInstance().players) {
+			if(suggestion.person.contains(p.getPlayerName())) {
+				p.setRow(this.getRow());
+				p.setColumn(this.getColumn());
+			}
+		}
+		
+		//Choosing random weapon to suggest 
 		random = rand.nextInt(weapons.size());
 		suggestion.weapon = weapons.get(random).getCardName();
 
