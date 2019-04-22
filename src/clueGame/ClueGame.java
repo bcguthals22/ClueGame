@@ -83,7 +83,7 @@ public class ClueGame extends JFrame{
 	 * is, in addition to telling them how to move the turn fowrward. 
 	 */
 	private static void makeSplash() {
-		JOptionPane.showMessageDialog(null, "You are " + Board.getInstance().playerNames.get(0) + " and your color is " + Board.getInstance().playerColors.get(0) + " , press Next Player to play", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "You are " + Board.getInstance().playerNames.get(0) + " and your color is " + Board.getInstance().playerColors.get(0) + " , click a target square to play.", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
 
 	}
 	
