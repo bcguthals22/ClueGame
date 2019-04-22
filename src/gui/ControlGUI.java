@@ -63,6 +63,8 @@ public class ControlGUI extends JPanel {
 		//Creating a button to make an accusation
 		accuseButton = new JButton("Make Accusation");
 		
+		accuseButton.addActionListener(listener);
+		
 		panel.add(accuseButton); 
 		
 		
@@ -207,6 +209,10 @@ public class ControlGUI extends JPanel {
 		Board.getInstance().nextPlayer();
 	}
 	
+	public static void accusePlayer() {
+		Board.getInstance().accuse();
+	}
+	
 	
 	private class ButtonListener implements ActionListener {
 		private ButtonListener() {
@@ -216,6 +222,10 @@ public class ControlGUI extends JPanel {
 		public void actionPerformed(ActionEvent event) {
 			if(event.getSource() == ControlGUI.this.nextPlayerButton) {
 				controlNextPlayer();
+			}
+			
+			else if(event.getSource() == ControlGUI.this.accuseButton) {
+				accusePlayer();
 			}
 			
 		}

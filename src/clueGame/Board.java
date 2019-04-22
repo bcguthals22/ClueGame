@@ -24,6 +24,7 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import gui.AccuseGUI;
 import gui.ControlGUI;
 import gui.GuessGUI;
 
@@ -540,14 +541,17 @@ public class Board extends JPanel implements MouseListener{
 	}
 
 	public boolean checkAccusation(Solution accusation) {
+		
+		System.out.println(answer.person + answer.room + answer.weapon);
+		
 		int numRight = 0;
-		if(accusation.person.equalsIgnoreCase(answer.person)) {
+		if(accusation.person.contains(answer.person)) {
 			numRight++;
 		}
-		if(accusation.room.equalsIgnoreCase(answer.room)) {
+		if(accusation.room.contains(answer.room)) {
 			numRight++;
 		}
-		if(accusation.weapon.equalsIgnoreCase(answer.weapon)) {
+		if(accusation.weapon.contains(answer.weapon)) {
 			numRight++;
 		}
 		if(numRight == 3) {
@@ -726,6 +730,40 @@ public class Board extends JPanel implements MouseListener{
 		
 		//Repaint the board with the new player locations and highlighted squares if the currentPlayer is human
 		repaint();
+		
+	
+	}
+	
+	public void accuse() {
+		
+		boolean result = false;
+		
+		if(currentPlayer.type != PlayerType.HUMAN) {
+			JOptionPane.showMessageDialog(null, "You can not accuse when it is not your turn");
+			return;
+		}
+		
+		AccuseGUI accuseGUI = new AccuseGUI();
+		
+		accuseGUI.setVisible(true);
+		
+		if(accuseGUI.go) {
+			Solution acusation = accuseGUI.accusation;
+			
+			result = checkAccusation(acusation);
+			
+			if(result) {
+				JOptionPane.showMessageDialog(null, "WOO! You win!");
+				
+				System.exit(0);
+			}
+			
+			else {
+				JOptionPane.showMessageDialog(null, "Sorry, not correct.");
+			}
+		}
+		
+	
 	}
 	
 	/*
