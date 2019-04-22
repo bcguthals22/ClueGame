@@ -100,20 +100,25 @@ public class ComputerPlayer extends Player {
 			int counter = 0;
 			String deckCardName = c.getCardName();
 			for(Card card : seenCards) {
+				
 				String seenCardName = card.getCardName();
 
 				if(seenCardName.contains(deckCardName)) {
 					continue;
 				}
+				
 				if(c.type.equals(CardType.ROOM)) {
 					continue;
 				}
 				counter++;
 			}
+			
 			if(counter == seenCards.size()) {
+				
 				if(c.type.equals(CardType.PERSON)) {
 					people.add(c);
 				}
+				
 				else if(c.type.equals(CardType.WEAPON)) {
 					weapons.add(c);
 				}
@@ -203,17 +208,21 @@ public class ComputerPlayer extends Player {
 			makeAccusation(accusation);
 		}
 		
+		//Default finished is true for computer players
 		finished = true;
 		
 		Set<BoardCell> targets = Board.getInstance().targets;
 		
 		BoardCell newLoc = pickLocation(targets);
 		
+		//Setting new location
 		setRow(newLoc.row);
 		setColumn(newLoc.column);
 		
+		//Determining the room that was last visited
 		lastVisitedRoom = newLoc.getInitial().charAt(0); 
 		
+		//If the current location is a room start the suggestion process
 		if(newLoc.isDoorway()) {
 			String initial = newLoc.getInitial();
 			switch(initial) {
@@ -252,24 +261,16 @@ public class ComputerPlayer extends Player {
 				break;
 			}
 			
+			//Creating a suggestion once in the room and pushing the information to the control GUI
 			createSuggestion(currentRoom);
 			ControlGUI.guessField.setText(suggestion.person + " " + suggestion.room + " " + suggestion.weapon);
+			
 			
 			//Set flag if nobody can disprove suggestion. Next turn, computer will make use that suggestion as an accusation
 			if(Board.getInstance().handleSuggestion(suggestion,this) == null && haveCard(suggestion) == false) {
 				accusation = new Solution();
 				accusation = suggestion;
 				flag = true;
-			}
-			Card card = Board.getInstance().handleSuggestion(suggestion, this);
-			
-			//If nobody is able to disprove, then say No new clue, if somebody can disprove, show the card
-			if(card.getCardName() == null) {
-				ControlGUI.guessResField.setText("No new clue");
-			}
-			else {
-				ControlGUI.guessResField.setText(card.getCardName());
-
 			}
 		}
 		

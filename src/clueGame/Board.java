@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import gui.ControlGUI;
+import gui.GuessGUI;
 
 import java.util.*;
 
@@ -490,12 +491,20 @@ public class Board extends JPanel implements MouseListener{
 	public void selectAnswer() {
 
 	}
-
+	
+	/*
+	 * Function for handleing the suggestions made by players. It takes in a sugesstion and accusing player
+	 * Determines if the card is in the hand of the other players and lets the players know by the Contol GUI
+	 * if the suggestion can be disproven.
+	 */
 	public Card handleSuggestion(Solution suggestion, Player accusingPlayer) {
 		int numAsked = 0;
 
 		int currentPlayer = players.indexOf(accusingPlayer);
-
+		
+		/*
+		 * Go through the players hands and see if the suggestion can be disproven
+		 */
 		while(numAsked < players.size()) {
 			currentPlayer = (currentPlayer + 1) % players.size();
 			Player player = (Player)players.get(currentPlayer);
@@ -509,11 +518,19 @@ public class Board extends JPanel implements MouseListener{
 						p.updateSeenCards(card);
 					}
 					playerDisprove = player.getPlayerName();
+					
+					//If someone can disprove push the information that was disproven to the control GUI
+					ControlGUI.guessResField.setText(card.getCardName());
+					
 					return card;
 				}
 			}
+			
 			numAsked++;
 		}
+		
+		//If nobody can disprove the sugesttion let the players know by pushing the infromation to the control GUI
+		ControlGUI.guessResField.setText("Nobody can disprove");
 		
 		return null;
 	}
@@ -673,6 +690,11 @@ public class Board extends JPanel implements MouseListener{
 
 		}
 		
+		//Reseting the Control GUI feilds so it only shows the relvent information from the current turn rather than
+		//Having the information stick arount on subsequent turns 
+		ControlGUI.guessField.setText("");
+		ControlGUI.guessResField.setText("");
+		
 		
 		currentPlayerNumber = (currentPlayerNumber + 1);
 		
@@ -683,6 +705,7 @@ public class Board extends JPanel implements MouseListener{
 		
 		
 		currentPlayer = players.get(currentPlayerNumber);
+		
 		
 		//Setting the control GUI text field with the current player
 		ControlGUI.turnField.setText(currentPlayer.getPlayerName());
@@ -733,6 +756,59 @@ public class Board extends JPanel implements MouseListener{
 			
 			//Repaint the board with the unhighlighted squares
 			repaint();
+			
+			if(clicked.isDoorway()) {
+				String initial = clicked.getInitial();
+				
+				String currentRoom = null;
+				
+				switch(initial) {
+				case "C":
+					currentRoom = "Cloak Room";
+					break;
+				case "G":
+					currentRoom = "Gallery";
+					break;
+				case "A":
+					currentRoom = "Archery Range";
+					break;
+				case "D":
+					currentRoom = "Drawing Room";
+					break;
+				case "I":
+					currentRoom = "Wine Cellar";
+					break;
+				case "S":
+					currentRoom = "Stables";
+					break;
+				case "R":
+					currentRoom = "Billiard Room";
+					break;
+				case "K":
+					currentRoom = "Kitchen";
+					break;
+				case "B":
+					currentRoom = "Ballroom";
+					break;
+				case "P":
+					currentRoom = "Parking Garage";
+					break;
+				case "L":
+					currentRoom = "Swimming Pool";
+					break;
+				}
+				GuessGUI guessGUI = new GuessGUI(currentRoom);
+				
+				
+				guessGUI.setVisible(true);
+				
+				
+				if(guessGUI.go) {
+					ControlGUI.guessField.setText(guessGUI.guess.person + ", " + guessGUI.guess.room + ", " + guessGUI.guess.weapon);
+					handleSuggestion(guessGUI.guess, this.currentPlayer);
+				}
+				
+			}
 		}
 	}
 	

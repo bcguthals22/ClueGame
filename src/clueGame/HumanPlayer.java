@@ -6,7 +6,16 @@ package clueGame;
 
 import java.awt.Color;
 
+import gui.ControlGUI;
+import gui.GuessGUI;
+
+
+
 public class HumanPlayer extends Player {
+	
+	public Solution suggestion;
+	public GuessGUI guessGUI;
+	
 	public HumanPlayer() {
 		super();
 	}
@@ -54,6 +63,8 @@ public class HumanPlayer extends Player {
 		setRow(clicked.row);
 		setColumn(clicked.column);
 		
-		finished = true; 
+
+		finished = true;
 	}
 }
+
